@@ -30,3 +30,5 @@ Difference between public, private and default value decrelation?
 is val and var public, private and default decrelation?  
 deceralation of public, private and default types in python?  
 Difference between a Data Engineer, Data Analyst and Data Scientist?  
+Difference between where and havings clauses in SQL?  
+Changing file permissions in Shell Scripting?  
