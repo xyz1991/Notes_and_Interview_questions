@@ -25,3 +25,8 @@ How to change default memory parameters in Hive using set command?<br />
 Case class in SparkSQL?<br />
 What is spark executor?<br />
 What is splittablity and block compression and How does it effects different file formats like CSV, JSON, XML, AVRO and Parquet?  
+Difference between object, method, functions and classes?  
+Difference between public, private and default value decrelation?  
+is val and var public, private and default decrelation?  
+deceralation of public, private and default types in python?  
+Difference between a Data Engineer, Data Analyst and Data Scientist?  
