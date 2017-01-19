@@ -32,3 +32,4 @@ deceralation of public, private and default types in python?
 Difference between a Data Engineer, Data Analyst and Data Scientist?  
 Difference between where and havings clauses in SQL?  
 Changing file permissions in Shell Scripting?  
+Difference between Map side and reduce side joins?  
