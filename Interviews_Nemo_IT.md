@@ -16,7 +16,7 @@ Disadvantages of Impala?(speculative execution)<br />
 Sqoop => Oracel to HDFS<br />
 Tablue data vizulalization?<br />
 Spark => Difference between action and transformation?<br />
-How WebLog and Transaction information to be processed by Big Data is Generated?  
+How WebLog and Transaction information to be processed by Big Data is Generated(Data Sources People(Social Media), Machines(WebLogs), Organisation(Transactions))?  
 
 # 2nd Interview
 Map/reduce if 1st file had empId and empName & 2nd file empId and empSalary. How to find the max salary empId? How many mappers are launched?<br />
