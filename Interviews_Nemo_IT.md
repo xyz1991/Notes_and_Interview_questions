@@ -7,6 +7,8 @@ Turning Hive queries?(Small table, Big table, Distributed cache)<br />
 Partionting and Bucketing difference?<br />
 Hive Queries:-<br />
 DIfference between where and having clauses?  
+HAVING is used to check conditions after the aggregation takes place.  
+WHERE is used before the aggregation takes place.  
 select * from Data => No Mapper & No Reducer<br />
 where = "" => Mappers only<br />
 Group by = "" => Reducer only<br />
