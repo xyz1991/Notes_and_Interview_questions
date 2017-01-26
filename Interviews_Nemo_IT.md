@@ -6,6 +6,7 @@ Internal table- to add data to the already exsiting table.<br />
 Turning Hive queries?(Small table, Big table, Distributed cache)<br />
 Partionting and Bucketing difference?<br />
 Hive Queries:-<br />
+DIfference between where and having clauses?  
 select * from Data => No Mapper & No Reducer<br />
 where = "" => Mappers only<br />
 Group by = "" => Reducer only<br />
