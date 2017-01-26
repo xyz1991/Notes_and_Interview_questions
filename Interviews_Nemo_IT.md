@@ -36,4 +36,10 @@ Difference between a Data Engineer, Data Analyst and Data Scientist?
 Difference between where and havings clauses in SQL?  
 Changing file permissions in Shell Scripting?  
 Difference between Map side and reduce side joins?  
-Difference between GroupBy, OrderBy and sortBy?  
+Difference between GroupBy, OrderBy, sortBy, DISTRIBUTE BY and CLUSTER BY x?  
+GroupBy=> Aggregates the Data into groups like using SUM, Avg etc.. on a cloumn.  
+ORDER BY guarantees global ordering, but does this by pushing all data through just one reducer. This is basically unacceptable for large datasets. You end up one sorted file as output.  
+SORT BY x: orders data at each of N reducers, but each reducer can receive overlapping ranges of data. You end up with N or more sorted files with overlapping ranges.  
+DISTRIBUTE BY x: ensures each of N reducers gets non-overlapping ranges of x, but doesn't sort the output of each reducer. You end up with N or unsorted files with non-overlapping ranges.  
+CLUSTER BY x: ensures each of N reducers gets non-overlapping ranges, then sorts by those ranges at the reducers. This gives you global ordering, and is the same as doing (DISTRIBUTE BY x and SORT BY x). You end up with N or more sorted files with non-overlapping ranges.  
+So CLUSTER BY is basically the more scalable version of ORDER BY.  
