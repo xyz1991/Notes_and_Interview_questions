@@ -9,6 +9,7 @@ Hive Queries:-<br />
 DIfference between where and having clauses?  
 HAVING is used to check conditions after the aggregation takes place.  
 WHERE is used before the aggregation takes place.  
+The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.  
 select * from Data => No Mapper & No Reducer<br />
 where = "" => Mappers only<br />
 Group by = "" => Reducer only<br />
