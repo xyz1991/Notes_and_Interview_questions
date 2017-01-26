@@ -12,7 +12,7 @@ Group by = "" => Reducer only<br />
 UDF's in Hive and Hwo do you Implement it?<br />
 Difference between Impala and Hive?<br />
 Difference between Map-reduce and spark? Advantages and disadvantages and execution methods.  
-Yarn Resources?<br />
+Yarn Resources and peformane tuning?<br />
 Disadvantages of Impala?(speculative execution)<br />
 Sqoop => Oracel to HDFS<br />
 Tablue data vizulalization?<br />
