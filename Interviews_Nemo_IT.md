@@ -62,5 +62,6 @@ So CLUSTER BY is basically the more scalable version of ORDER BY.
 
 #3rd Interview  
 Sabre architecture?  
-How to Upload Coustom SerDes in Hive?  
+UDFs in Spark and Hive?  
+Changing File permission in Hive?  
 
