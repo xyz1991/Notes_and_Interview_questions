@@ -78,4 +78,16 @@ spark-submit \
 --conf "spark.speculation=true" \
 --conf "spark.speculation.multiplier=5" \
 --conf "spark.speculation.quantile=0.90" \
---class "org.asyncified.myClass" "path/to/uberjar.jar"
+--class "org.asyncified.myClass" "path/to/uberjar.jar"  
+  
+    
+Primary key vs unique key in SQL?
+Primary Key:  
+Can be only one in a table  
+In some DBMS it cannot be NULL - e.g. MySQL adds NOT NULL  
+Primary Key is a unique key identifier of the record  
+Unique Key:  
+Can be more than one unique key in one table  
+Unique key can have null values  
+It can be a candidate key  
+Unique key can be null and may not be unique  
