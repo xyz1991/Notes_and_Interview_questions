@@ -70,3 +70,5 @@ Examples: SELECT, UPDATE, INSERT statements
 
 DDL is abbreviation of Data Definition Language. It is used to create and modify the structure of database objects in database.  
 Examples: CREATE, ALTER, DROP statements  
+What are dirvers and executers in Spark?  
+Explain the Process of Spark Streaming?  
