@@ -73,4 +73,9 @@ Examples: CREATE, ALTER, DROP statements
 What are dirvers and executers in Spark?  
 Explain the Process of Spark Streaming?  
 Why is Spark conf and spark context related to the program?  
-
+How to enable speculative execution in spark?  
+spark-submit \
+--conf "spark.speculation=true" \
+--conf "spark.speculation.multiplier=5" \
+--conf "spark.speculation.quantile=0.90" \
+--class "org.asyncified.myClass" "path/to/uberjar.jar"
