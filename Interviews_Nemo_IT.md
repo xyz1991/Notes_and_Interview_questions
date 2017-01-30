@@ -64,4 +64,9 @@ So CLUSTER BY is basically the more scalable version of ORDER BY.
 Sabre architecture?  
 UDFs in Spark and Hive?  
 Changing File permission in Hive?  
+What is DML and DDL?  
+DML is abbreviation of Data Manipulation Language. It is used to retrieve, store, modify, delete, insert and update data in database.  
+Examples: SELECT, UPDATE, INSERT statements  
 
+DDL is abbreviation of Data Definition Language. It is used to create and modify the structure of database objects in database.  
+Examples: CREATE, ALTER, DROP statements  
