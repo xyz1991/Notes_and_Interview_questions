@@ -91,3 +91,7 @@ Can be more than one unique key in one table
 Unique key can have null values  
 It can be a candidate key  
 Unique key can be null and may not be unique  
+  
+  
+Regular expressions in hive?  
+
