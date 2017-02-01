@@ -99,3 +99,16 @@ map for each Tuple or row level operations.
 flat map for whole document level operations.  
   
   
+Use of Some() KeyWord in Scala?  
+def toInt(in: String): Option[Int] = {  
+    try {  
+        Some(Integer.parseInt(in.trim))  
+    } catch {  
+        case e: NumberFormatException => None  
+    }  
+}  
+toInt(someString) match {  
+    case Some(i) => println(i)  
+    case None => println("That didn't work.")  
+}  
+Used to better handle the exception errors.  
