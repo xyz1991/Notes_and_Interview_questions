@@ -111,4 +111,4 @@ toInt(someString) match {
     case Some(i) => println(i)  
     case None => println("That didn't work.")  
 }  
-Used to better handle the exception errors.  
+Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
