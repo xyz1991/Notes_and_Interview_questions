@@ -94,4 +94,8 @@ Unique key can be null and may not be unique
   
   
 Regular expressions in hive?  
-
+When to use map and flat map in spark?  
+map for each Tuple or row level operations.  
+flat map for whole document level operations.  
+  
+  
