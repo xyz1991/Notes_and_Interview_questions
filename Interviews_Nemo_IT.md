@@ -37,6 +37,8 @@ What is an RDD in spark?(Chapter 3 Spark Data Analytics cook book)
 
 # 2nd Interview
 Map/reduce if 1st file had empId and empName & 2nd file empId and empSalary. How to find the max salary empId? How many mappers are launched?<br />
+A block is read in the form of a key-value pair in TextInputFormat, where the key is the byte offset of a line and the value is content of the line itself. Each block is considered as an InputSplit and a single Mapper is lauched for each inputSplit.  
+  
 Invalidate metaData command in Impala?<br />
 How to load UDF's in Hive?<br />
 How to change default memory parameters in Hive using set command?<br />
