@@ -1,7 +1,7 @@
 # 1st Interview
   
 ##Brief the resume?<br />
- 
+I’m a Hadoop Developer with hands on experience in performing Data Analytics using Hadoop components like Spark, SparkSQL, Spark-Streaming, Hive and Impala with in-depth understanding of Hadoop Map-reduce and distributed file systems architecture. I have mainly worked on Parsing, filtering and Manipulating different kinds of Semi-Structured, Unstructured and Structured data.  
 What are the kind of tables used in Hive?Why?<br />
 External table- When you want for Data retrival after droping the table<br />
 Internal table- to add data to the already exsiting table.<br />
