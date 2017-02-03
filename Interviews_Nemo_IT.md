@@ -1,5 +1,7 @@
 # 1st Interview
-Brief the resume?<br />
+  
+##Brief the resume?<br />
+ 
 What are the kind of tables used in Hive?Why?<br />
 External table- When you want for Data retrival after droping the table<br />
 Internal table- to add data to the already exsiting table.<br />
