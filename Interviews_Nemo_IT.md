@@ -169,4 +169,5 @@ toInt(someString) match {
 Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
   
 How to Import and export Data using Sqoop?  
-
+What is a Sparse Vector?  
+A sparse vector has two parallel arrays –one for indices and the other for values. These vectors are used for storing non-zero entries to save space.  
