@@ -19,8 +19,13 @@ My most recent project is at Sabre in Southlake TX, which is the largest Global 
 •	Worked on performance tuning, debugging and optimization of hive queries by changing the default YARN values.  
   
 ##What are the kind of tables used in Hive?Why?  
-External table- When you want for Data retrival after droping the table<br />
-Internal table- to add data to the already exsiting table.<br />
+Hive has a relational database on the master node it uses to keep track of state. For instance, when you CREATE TABLE FOO(foo string) LOCATION 'hdfs://tmp/';, this table schema is stored in the database.  
+External table- When you want for Data retrival after droping the table.  when external table is declared, default table path is changed to specified location in hive. When you drop an external table, it only drops the meta data but not the Data.<br />
+Internal table- to add data to the already exsiting table. When you drop an internal table, it drops the data, and it also drops the metadata.<br />
+  
+##Partioning External Table in Hive?  
+Has creating a external table involves changing of the Default Table Data path, we need add each partion manullay using Alter Table command. ALTER TABLE user ADD PARTITION(date='2010-02-22') to update the metadata in Hive metastore.  
+  
 Turning Hive queries?(Small table, Big table, Distributed cache)<br />
 What is Partioning and bucketing in hive & Partionting and Bucketing difference?<br />
 Hive Queries:-<br />
