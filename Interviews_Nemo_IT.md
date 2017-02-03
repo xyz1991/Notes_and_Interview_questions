@@ -27,8 +27,38 @@ Internal table- to add data to the already exsiting table. When you drop an inte
 Has creating a external table involves changing of the Default Table Data path, we need add each partion manullay using Alter Table command. ALTER TABLE user ADD PARTITION(date='2010-02-22') to update the metadata in Hive metastore.  
   
 Turning Hive queries?(Small table, Big table, Distributed cache)<br />
-What is Partioning and bucketing in hive & Partionting and Bucketing difference?<br />
-Hive Queries:-<br />
+Turning hive for performance and optimization involves changing default yarn parameters. Like  
+For over coming Java HeapDumpOnOutOfMemoryError:  
+set mapreduce.map.memory.mb=12288;  
+set mapreduce.map.java.opts= -Xmx8192M -verbose:gc -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70;  
+To Optimise the a multiple Map-Reduce jobs:  
+SET hive.exec.compress.output=true;  
+SET io.seqfile.compression.type=BLOCK;  
+To enable bucketing in hive:(Not needed form Hive 2.X)  
+set hive.enforce.bucketing = true;  
+To create avro file:  
+set hive.exec.compress.output=true;  
+set avro.output.codec=snappy;  
+
+##What is Partioning and bucketing in hive & Partionting and Bucketing difference?<br />
+Partioning of Hive tables can result in unknown number of Directories in Hive default Table storge path, depending on the Cloumns used.Partitioning data is often used for distributing load horizontally, this has performance benefit, and helps in organizing data in a logical fashion.  
+  
+Bucketing is another technique for decomposing data sets into more manageable parts in each Hive_Table Partition. Records with the same Column_value will always be stored in the same bucket. Hive can create a logically correct sampling. Bucketing also aids in doing efficient map-side joins and will be stored in a given number of Buckets specified in the Query.
+
+set hive.enforce.bucketing = true;  
+create table IF NOT EXISTS hotelhodsrrequest_PCCparsing_scala_Partitioned_and_Bucketed (PCC String, PropertyCode String, Duplication_Counts int)  
+partitioned by (Year String, Month String)  
+CLUSTERED BY (PCC) INTO 20 BUCKETS;  
+  
+INSERT OVERWRITE TABLE hotelhodsrrequest_PCCparsing_scala_Partitioned_and_Bucketed partition (Year, Month)  
+SELECT hotelhodsrrequest_pccparsing_scala.pcc as PCC,  
+hotelhodsrrequest_pccparsing_scala.propertycode as PropertyCode,  
+hotelhodsrrequest_pccparsing_scala.duplication_counts as Duplication_Counts,  
+hotelhodsrrequest_pccparsing_scala.year as Year,  
+hotelhodsrrequest_pccparsing_scala.month as Month  
+FROM hotelhodsrrequest_PCCparsing_scala;  
+  
+##Hive Queries:-<br />
 DIfference between where and having clauses?  
 HAVING is used to check conditions after the aggregation takes place.  
 WHERE is used before the aggregation takes place.  
