@@ -20,3 +20,6 @@ My most recent project is at Sabre in Southlake TX, which is the largest Global 
   
 ##Describe the Arcitecture at your Organisation?  
 ![stack Overflow](https://www.dropbox.com/s/3heoh2vsif84mgv/Oracle_Big_Data_Sloution.png?raw=1)
+<p align="center">
+  <img src="https://www.dropbox.com/s/3heoh2vsif84mgv/Oracle_Big_Data_Sloution.png?raw=1" width="350"/>
+</p>
