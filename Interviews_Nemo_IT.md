@@ -171,3 +171,56 @@ Used to better handle the exception errors. Can be used to return some other val
 How to Import and export Data using Sqoop?  
 What is a Sparse Vector?  
 A sparse vector has two parallel arrays –one for indices and the other for values. These vectors are used for storing non-zero entries to save space.  
+What is RDD?  
+RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are –  
+Immutable – RDDs cannot be altered.  
+Resilient – If a node holding the partition fails the other node takes the data.  
+Explain about transformations and actions in the context of RDDs?  
+Transformations are functions executed on demand, to produce a new RDD. All transformations are followed by actions. Some examples of transformations include map, filter and reduceByKey.  
+Actions are the results of RDD computations or transformations. After an action is performed, the data from RDD moves back to the local machine. Some examples of actions include reduce, collect, first, and take.  
+
+How can you minimize data transfers when working with Spark?  
+Minimizing data transfers and avoiding shuffling helps write spark programs that run in a fast and reliable manner. The various ways in which data transfers can be minimized when working with Apache Spark are:  
+Using Broadcast Variable- Broadcast variable enhances the efficiency of joins between small and large RDDs.  
+Using Accumulators – Accumulators help update the values of variables in parallel while executing.  
+The most common way is to avoid operations ByKey, repartition or any other operations which trigger shuffles.  
+What is a DStream?
+Discretized Stream is a sequence of Resilient Distributed Databases that represent a stream of data. DStreams can be created from various sources like Apache Kafka, HDFS, and Apache Flume. DStreams have two operations –  
+Transformations that produce a new DStream.  
+Output operations that write data to an external system.  
+What is the advantage of a Parquet file?  
+Parquet file is a columnar format file that helps –  
+Limit I/O operations  
+Consumes less space  
+Fetches only required columns.  
+What do you understand by Pair RDD?  
+Special operations can be performed on RDDs in Spark using key/value pairs and such RDDs are referred to as Pair RDDs. Pair RDDs allow users to access each key in parallel. They have a reduceByKey () method that collects data based on each key and a join () method that combines different RDDs together, based on the elements having the same key.  
+Explain about the different types of transformations on DStreams?  
+Stateless Transformations- Processing of the batch does not depend on the output of the previous batch. Examples – map (), reduceByKey (), filter ().  
+Stateful Transformations- Processing of the batch depends on the intermediary results of the previous batch. Examples –Transformations that depend on sliding windows.  
+How can you remove the elements with a key present in any other RDD?  
+Use the subtractByKey () function  
+What is the difference between persist() and cache()?   
+persist () allows the user to specify the storage level whereas cache () uses the default storage level.  
+What are the various levels of persistence in Apache Spark?  
+Apache Spark automatically persists the intermediary data from various shuffle operations, however it is often suggested that users call persist () method on the RDD in case they plan to reuse it. Spark has various persistence levels to store the RDDs on disk or in memory or as a combination of both with different replication levels.  
+The various storage/persistence levels in Spark are -  
+MEMORY_ONLY  
+MEMORY_ONLY_SER  
+MEMORY_AND_DISK  
+MEMORY_AND_DISK_SER, DISK_ONLY  
+OFF_HEAP  
+Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?  
+Data storage model in Apache Spark is based on RDDs. RDDs help achieve fault tolerance through lineage. RDD always has the information on how to build from other datasets. If any partition of a RDD is lost due to failure, lineage helps build only that particular lost partition.  
+Explain about the core components of a distributed Spark application.  
+Driver- The process that runs the main () method of the program to create RDDs and perform transformations and actions on them.  
+Executor –The worker processes that run the individual tasks of a Spark job.  
+Cluster Manager-A pluggable component in Spark, to launch Executors and Drivers. The cluster manager allows Spark to run on top of other external managers like Apache Mesos or YARN.  
+What do you understand by Executor Memory in a Spark application?  
+Every spark application has same fixed heap size and fixed number of cores for a spark executor. The heap size is what referred to as the Spark executor memory which is controlled with the spark.executor.memory property of the –executor-memory flag. Every spark application will have one executor on each worker node. The executor memory is basically a measure on how much memory of the worker node will the application utilize.  
+What are the disadvantages of using Apache Spark over Hadoop MapReduce?  
+Apache spark does not scale well for compute intensive jobs and consumes large number of system resources. Apache Spark’s in-memory capability at times comes a major roadblock for cost efficient processing of big data. Also, Spark does have its own file management system and hence needs to be integrated with other cloud based data platforms or apache hadoop.  
+ What do you understand by SchemaRDD?  
+An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
+Define a worker node.  
+A node that can run the Spark application code in a cluster can be called as a worker node. A worker node can have more than one worker which is configured by setting the SPARK_ WORKER_INSTANCES property in the spark-env.sh file. Only one worker is started if the SPARK_ WORKER_INSTANCES property is not defined.  
