@@ -224,3 +224,14 @@ Apache spark does not scale well for compute intensive jobs and consumes large n
 An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
 Define a worker node.  
 A node that can run the Spark application code in a cluster can be called as a worker node. A worker node can have more than one worker which is configured by setting the SPARK_ WORKER_INSTANCES property in the spark-env.sh file. Only one worker is started if the SPARK_ WORKER_INSTANCES property is not defined.  
+  
+#4th Interview  
+Explain Specific Streaming process and saving files to HDFS in SparkStreaming with Kafka?  
+Explain Cassandra Arcitecture and timeStamps methods in it?  
+What is a lineage Map in Spark?  
+Why the Data needs to serialised in Spark?  
+Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
+Adding other jars(thrid party) in spark when execution in spark-submit?  
+How to enable Speculative execution in Spark?  
+Different join methods in Hive(using distributed Chace)?  
+Difference between an RDD and DataFrame?  
