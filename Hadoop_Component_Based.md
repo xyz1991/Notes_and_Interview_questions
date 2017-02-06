@@ -190,7 +190,7 @@ Use the subtractByKey () function
 ##SparkStreaming  
 ###Explain the Process of Spark Streaming?  
 ###What is a DStream?  
-Discretized Stream is a sequence of Resilient Distributed Databases that represent a stream of data. DStreams can be created from various sources like Apache Kafka, HDFS, and Apache Flume. DStreams have two operations –
+Discretized Stream is a sequence of Resilient Distributed Databases that represent a stream of data. DStreams can be created from various sources like Apache Kafka, HDFS, and Apache Flume. DStreams have two operations –  
 Transformations that produce a new DStream.  
 Output operations that write data to an external system.  
 ###Explain about the different types of transformations on DStreams?  
