@@ -113,7 +113,7 @@ Conceptually DAG model is a strict generalization of MapReduce model. DAG-based 
   
 <p align="center">
   <img src="https://www.dropbox.com/s/99ctmul7unk6wvk/Map-Reduce.png?raw=1" width="650"/>
-  <img src="https://www.dropbox.com/s/8uw8f0ieu4uuqgi/Spark.jpg?dl=0?raw=1" width="650"/>
+  <img src="https://www.dropbox.com/s/8uw8f0ieu4uuqgi/Spark.jpg?raw=1" width="650"/>
 </p>
   
 Conceptually speaking, the MapReduce model simply states that distributed computation on a large dataset can be boiled down to two kinds of computation steps - a map step and a reduce step. One pair of map and reduce does one level of aggregation over the data. Complex computations typically require multiple such steps. When you have multiple such steps, it essentially forms a DAG of operations. So a DAG execution model is essentially a generalization of the MapReduce model.  
