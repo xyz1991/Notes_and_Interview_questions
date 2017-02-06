@@ -35,7 +35,9 @@ The ability to extract information from operational data in real time is critica
 Operational Data  
 A company's operations are supported by applications that automate key business processes. These include areas such as sales, service, order management, manufacturing, purchasing, billing, accounts receivable and accounts payable. These applications require significant amounts of data to function correctly.  This includes data about the objects that are involved in transactions, as well as the transaction data itself.  For example, when a customer buys a product, the transaction is managed by a sales application.  The objects of the transaction are the Customer and the Product.  The transactional data is the time, place, price, discount, payment methods, etc. used at the point of sale. The transactional data is stored in On-Line Transaction Processing (OLTP) tables that are designed to support high volume low latency access and update.  
   
-MDM solutions that focus on managing operational master data supporting transactional applications are called Operational MDM. They rely heavily on integration technologies. They bring real value to the enterprise, but lack the ability to influence reporting and analytics.   
+MDM solutions that focus on managing operational master data supporting transactional applications are called Operational MDM. They rely heavily on integration technologies. They bring real value to the enterprise, but lack the ability to influence reporting and analytics.
+  
+  
 Operational Big Data systems provide operational features to run real-time, interactive workloads that ingest and store data. Cassandra is a top technology for operational Big Data applications with over 10 million downloads of its open source software.  
   
 Analytical Data  
