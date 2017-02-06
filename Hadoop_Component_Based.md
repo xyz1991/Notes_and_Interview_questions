@@ -53,6 +53,18 @@ Analytical Big Data technologies, on the other hand, are useful for retrospectiv
 ###Difference between public, private and default value decrelation in Java?  
 ###is val and var public, private and default decrelation in Scala?  
 ###Use of Some() KeyWord in Scala?  
+def toInt(in: String): Option[Int] = {  
+try {  
+Some(Integer.parseInt(in.trim))  
+} catch {  
+case e: NumberFormatException => None  
+}  
+}  
+toInt(someString) match {  
+case Some(i) => println(i)  
+case None => println("That didn't work.")  
+}  
+Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
 ###deceralation of public, private and default types in python?  
 ###Changing file permissions in Shell Scripting?  
 ###What is DML and DDL?  
@@ -71,7 +83,7 @@ Can be more than one unique key in one table
 Unique key can have null values  
 It can be a candidate key  
 Unique key can be null and may not be unique  
-###What is the advantage of a Parquet file?(A)  
+###What is the advantage of a Parquet file?  
 Parquet file is a columnar format file that helps –  
 Limit I/O operations  
 Consumes less space  
@@ -88,48 +100,100 @@ Prescriptive Analytics: Still using the credit card transactions example, you ma
   
 #MapReduce  
   
-###Map/reduce if 1st file had empId and empName & 2nd file empId and empSalary. How to find the max salary empId? How many mappers are launched?(A)  
+###Map/reduce if 1st file had empId and empName & 2nd file empId and empSalary. How to find the max salary empId? How many mappers are launched?(Partially Unawnsered)  
+A block is read in the form of a key-value pair in TextInputFormat, where the key is the byte offset of a line and the value is content of the line itself. Each block is considered as an InputSplit and a single Mapper is lauched for each inputSplit.  
 ###Explaine Map/Reduce process?  
   
   
 #Spark  
   
 ##SparkCore  
-###Difference between Map-reduce and spark? Advantages and disadvantages and execution methods?(A)  
-###What are the disadvantages of using Apache Spark over Hadoop MapReduce?(A)  
-###Define a worker node?(A)  
+###Difference between Map-reduce and spark? Advantages and disadvantages and execution methods?  
+Conceptually DAG model is a strict generalization of MapReduce model. DAG-based systems like Spark and Tez that are aware of the whole DAG of operations can do better global optimizations than systems like Hadoop MapReduce which are unaware of the DAG to be executed.  
+  
+<p align="center">
+  <img src="https://www.dropbox.com/s/99ctmul7unk6wvk/Map-Reduce.png?raw=1" width="650"/>
+  <img src="https://www.dropbox.com/s/8uw8f0ieu4uuqgi/Spark.jpg?dl=0?raw=1" width="650"/>
+</p>
+  
+Conceptually speaking, the MapReduce model simply states that distributed computation on a large dataset can be boiled down to two kinds of computation steps - a map step and a reduce step. One pair of map and reduce does one level of aggregation over the data. Complex computations typically require multiple such steps. When you have multiple such steps, it essentially forms a DAG of operations. So a DAG execution model is essentially a generalization of the MapReduce model.  
+  
+While this is the theory, different systems implement this theory in different ways, and that is where the "advantages" and "disadvantages" come from. Computations expressed in Hadoop MapReduce boil down to multiple iterations of (i) read data from HDFS, (ii) apply map and reduce, (iii) write back to HDFS. Each map-reduce round is completely independent of each other, and Hadoop does not have any global knowledge of what MR steps are going to come after each MR. For many iterative algorithms this is inefficient as the data between each map-reduce pair gets written and read from filesystem. Newer systems like Spark and Tez improves performance over Hadoop by considering the whole DAG of map-reduce steps and optimizing it globally (e.g., pipelining consecutive map steps into one, not write intermediate data to HDFS). This prevents writing data back and forth after every reduce.  
+  
+Storm, being a streaming system, is slightly different from the batch processing systems referred earlier. It also sets up a DAG of nodes lets the records stream between the nodes. Its best to compare Storm with Spark Streaming (streaming system built over Spark) than Hadoop MapReduce. Both accepts a DAG of operations representing the streaming computation, but then process the DAG in slightly different ways. Storm sets up a DAG of node and allocates each operation in the DAG of ops to different nodes. Spark Streaming does not pre-allocate, rather uses the underlying Spark's mechanisms to dynamically allocate tasks to available resources. This gives different kinds of performance characteristics.  
+###What are the disadvantages of using Apache Spark over Hadoop MapReduce?  
+Apache spark does not scale well for compute intensive jobs and consumes large number of system resources. Apache Spark’s in-memory capability at times comes a major roadblock for cost efficient processing of big data. Also, Spark does have its own file management system and hence needs to be integrated with other cloud based data platforms or apache hadoop.  
+###Define a worker node?  
+A node that can run the Spark application code in a cluster can be called as a worker node. A worker node can have more than one worker which is configured by setting the SPARK_ WORKER_INSTANCES property in the spark-env.sh file. Only one worker is started if the SPARK_ WORKER_INSTANCES property is not defined.  
 ###What is a lineage Map in Spark?  
-###Explain about the core components of a distributed Spark application?(A)  
-###What do you understand by Executor Memory in a Spark application?(A)  
-###How to enable speculative execution in spark?(A)  
+###Explain about the core components of a distributed Spark application?  
+Driver- The process that runs the main () method of the program to create RDDs and perform transformations and actions on them.  
+Executor –The worker processes that run the individual tasks of a Spark job.  
+Cluster Manager-A pluggable component in Spark, to launch Executors and Drivers. The cluster manager allows Spark to run on top of other external managers like Apache Mesos or YARN.  
+###What do you understand by Executor Memory in a Spark application?  
+Every spark application has same fixed heap size and fixed number of cores for a spark executor. The heap size is what referred to as the Spark executor memory which is controlled with the spark.executor.memory property of the –executor-memory flag. Every spark application will have one executor on each worker node. The executor memory is basically a measure on how much memory of the worker node will the application utilize.  
+###How to enable speculative execution in spark?  
+spark-submit \  
+--conf "spark.speculation=true" \  
+--conf "spark.speculation.multiplier=5" \  
+--conf "spark.speculation.quantile=0.90" \  
+--class "org.asyncified.myClass" "path/to/uberjar.jar"  
 ###Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
 ###Adding other jars(thrid party) in spark when execution in spark-submit?  
-###How can you minimize data transfers when working with Spark?(A)  
-###Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?(A)  
+###How can you minimize data transfers when working with Spark?  
+Minimizing data transfers and avoiding shuffling helps write spark programs that run in a fast and reliable manner. The various ways in which data transfers can be minimized when working with Apache Spark are:  
+Using Broadcast Variable- Broadcast variable enhances the efficiency of joins between small and large RDDs.  
+Using Accumulators – Accumulators help update the values of variables in parallel while executing.  
+The most common way is to avoid operations ByKey, repartition or any other operations which trigger shuffles.  
+###Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?  
+Data storage model in Apache Spark is based on RDDs. RDDs help achieve fault tolerance through lineage. RDD always has the information on how to build from other datasets. If any partition of a RDD is lost due to failure, lineage helps build only that particular lost partition.  
 ###Why is Spark conf and spark context related to the program?  
-###What is an RDD in spark?(Chapter 3 Spark Data Analytics cook book)(A)  
+###What is an RDD in spark?(Partially anwsred look in Chapter 3 Spark Data Analytics cook book)  
+RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are –  
+Immutable – RDDs cannot be altered.  
+Resilient – If a node holding the partition fails the other node takes the data.  
 ###Why the Data needs to serialised in Spark?  
 ###Difference between action and transformation?  
-###When to use map and flat map in spark?(A)  
-###What is a Sparse Vector?(A)  
+###When to use map and flat map in spark?  
+map for each Tuple or row level operations.  
+flat map for whole document level operations.  
+###What is a Sparse Vector?  
+A sparse vector has two parallel arrays –one for indices and the other for values. These vectors are used for storing non-zero entries to save space.  
 ###UDFs in Spark?  
-###What do you understand by Pair RDD?(A)  
+###What do you understand by Pair RDD?  
+Special operations can be performed on RDDs in Spark using key/value pairs and such RDDs are referred to as Pair RDDs. Pair RDDs allow users to access each key in parallel. They have a reduceByKey () method that collects data based on each key and a join () method that combines different RDDs together, based on the elements having the same key.  
 ###Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
 ###Adding other jars(thrid party) in spark when execution in spark-submit?  
 ###What are broadcast and Accumulator variables in Spark?  
   
 ##SparkSQL  
 ###Difference between an RDD and DataFrame?  
-###What do you understand by SchemaRDD?(A)  
+###What do you understand by SchemaRDD?  
+An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
 ###Case class in SparkSQL?  
 ###Data preparation methods in SparkSQL?(Chapter 3 Spark Data Analytics cook book)  
-###How can you remove the elements with a key present in any other RDD?(A)  
+###How can you remove the elements with a key present in any other RDD?  
+Use the subtractByKey () function  
   
 ##SparkStreaming  
 ###Explain the Process of Spark Streaming?  
-###What is a DStream?(A)  
-###Explain about the different types of transformations on DStreams?(A)  
-###What is the difference between persist() and cache()?(A)  
+###What is a DStream?  
+Discretized Stream is a sequence of Resilient Distributed Databases that represent a stream of data. DStreams can be created from various sources like Apache Kafka, HDFS, and Apache Flume. DStreams have two operations –
+Transformations that produce a new DStream.  
+Output operations that write data to an external system.  
+###Explain about the different types of transformations on DStreams?  
+Stateless Transformations- Processing of the batch does not depend on the output of the previous batch. Examples – map (), reduceByKey (), filter ().  
+Stateful Transformations- Processing of the batch depends on the intermediary results of the previous batch. Examples –Transformations that depend on sliding windows.  
+###What is the difference between persist() and cache()?  
+persist () allows the user to specify the storage level whereas cache () uses the default storage level.  
+###What are the various levels of persistence in Apache Spark?  
+Apache Spark automatically persists the intermediary data from various shuffle operations, however it is often suggested that users call persist () method on the RDD in case they plan to reuse it. Spark has various persistence levels to store the RDDs on disk or in memory or as a combination of both with different replication levels.  
+The various storage/persistence levels in Spark are -  
+MEMORY_ONLY  
+MEMORY_ONLY_SER  
+MEMORY_AND_DISK  
+MEMORY_AND_DISK_SER, DISK_ONLY  
+OFF_HEAP  
 ###Explain Specific Streaming process and saving files to HDFS in SparkStreaming with Kafka?  
 ###How to create Streams for Basic Input SOurces like file and Socket & Advanced Sources like Kafka, Twitter and Flume?  
   
