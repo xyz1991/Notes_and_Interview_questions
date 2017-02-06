@@ -48,6 +48,18 @@ Analytical Big Data technologies, on the other hand, are useful for retrospectiv
   
 ###How WebLog and Transaction information to be processed by Big Data is Generated(Data Sources People(Social Media), Machines(WebLogs), Organisation(Transactions))?  
 ###Yarn Resources and peformane tuning?  
+Turning hive for performance and optimization involves changing default yarn parameters. Like  
+For over coming Java HeapDumpOnOutOfMemoryError:  
+set mapreduce.map.memory.mb=12288;  
+set mapreduce.map.java.opts= -Xmx8192M -verbose:gc -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70;  
+To Optimise the a multiple Map-Reduce jobs:  
+SET hive.exec.compress.output=true;  
+SET io.seqfile.compression.type=BLOCK;  
+To enable bucketing in hive:(Not needed form Hive 2.X)  
+set hive.enforce.bucketing = true;  
+To create avro file:  
+set hive.exec.compress.output=true;  
+set avro.output.codec=snappy;  
 ###Tablue data vizulalization?  
 ###Difference between object, method, functions and classes in Java?(Objects are instances of classes, whose class Functions can be acssed as methods)  
 ###Difference between public, private and default value decrelation in Java?  
@@ -202,29 +214,62 @@ OFF_HEAP
   
 ###Difference between Impala and Hive?  
 ###Disadvantages of Impala?(speculative execution)  
-###What are the kind of tables used in Hive?Why?(A)  
-###What is Partioning and bucketing in hive & Partionting and Bucketing difference?(A)  
-###Partioning External Table in Hive?(A)  
-###DIfference between where and having clauses?(A)  
-###select * from Data?(A)  
-###where = "" ?(A)  
-###Group by = "" ?(A)  
+###What are the kind of tables used in Hive?Why?  
+Hive has a relational database on the master node it uses to keep track of state. For instance, when you CREATE TABLE FOO(foo string) LOCATION 'hdfs://tmp/';, this table schema is stored in the database.  
+External table- When you want for Data retrival after droping the table. when external table is declared, default table path is changed to specified location in hive. When you drop an external table, it only drops the meta data but not the Data. 
+Internal table- to add data to the already exsiting table. When you drop an internal table, it drops the data, and it also drops the metadata.  
+###What is Partioning and bucketing in hive & Partionting and Bucketing difference?  
+Partioning of Hive tables can result in unknown number of Directories in Hive default Table storge path, depending on the Cloumns used.Partitioning data is often used for distributing load horizontally, this has performance benefit, and helps in organizing data in a logical fashion.  
+  
+Bucketing is another technique for decomposing data sets into more manageable parts in each Hive_Table Partition. Records with the same Column_value will always be stored in the same bucket. Hive can create a logically correct sampling. Bucketing also aids in doing efficient map-side joins and will be stored in a given number of Buckets specified in the Query.  
+  
+set hive.enforce.bucketing = true;  
+create table IF NOT EXISTS hotelhodsrrequest_PCCparsing_scala_Partitioned_and_Bucketed (PCC String, PropertyCode String, Duplication_Counts int)  
+partitioned by (Year String, Month String)  
+CLUSTERED BY (PCC) INTO 20 BUCKETS;  
+  
+INSERT OVERWRITE TABLE hotelhodsrrequest_PCCparsing_scala_Partitioned_and_Bucketed partition (Year, Month)  
+SELECT hotelhodsrrequest_pccparsing_scala.pcc as PCC,  
+hotelhodsrrequest_pccparsing_scala.propertycode as PropertyCode,  
+hotelhodsrrequest_pccparsing_scala.duplication_counts as Duplication_Counts,  
+hotelhodsrrequest_pccparsing_scala.year as Year,  
+hotelhodsrrequest_pccparsing_scala.month as Month  
+FROM hotelhodsrrequest_PCCparsing_scala;  
+###Partioning External Table in Hive?  
+Has creating a external table involves changing of the Default Table Data path, we need add each partion manullay using Alter Table command. ALTER TABLE user ADD PARTITION(date='2010-02-22') to update the metadata in Hive metastore.  
+###DIfference between where and having clauses?  
+HAVING is used to check conditions after the aggregation takes place.  
+WHERE is used before the aggregation takes place.  
+The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.  
+###How many mapper will "select * from Data" launch?  
+No Mapper & No Reducer  
+###Does "where = """ launch Mapper or reducers?  
+Mappers only  
+###Does "Group by = """ launch Mapper or reducers?  
+Reducer only
 ###UDF's in Hive and Hwo do you Implement it and How to load UDF's in Hive?  
 ###Invalidate metaData command in Impala?  
 ###How to change default Heap Dump memory parameters in Hive using set command?  
 ###Difference between Map side and reduce side joins?  
-###Difference between GroupBy, OrderBy, sortBy, DISTRIBUTE BY and CLUSTER BY x?(A)  
+###Difference between GroupBy, OrderBy, sortBy, DISTRIBUTE BY and CLUSTER BY x?  
+GroupBy=> Aggregates the Data into groups like using SUM, Avg etc.. on a cloumn. The GROUP BY clause’s purpose is summarize unique combinations of columns values. Often group by is followed by order by or cluster by cluases.  
+ORDER BY guarantees global ordering, but does this by pushing all data through just one reducer. This is basically unacceptable for large datasets. You end up one sorted file as output.  
+SORT BY x: orders data at each of N reducers, but each reducer can receive overlapping ranges of data. You end up with N or more sorted files with overlapping ranges.  
+DISTRIBUTE BY x: ensures each of N reducers gets non-overlapping ranges of x, but doesn't sort the output of each reducer. You end up with N or unsorted files with non-overlapping ranges.  
+CLUSTER BY x: ensures each of N reducers gets non-overlapping ranges, then sorts by those ranges at the reducers. This gives you global ordering, and is the same as doing (DISTRIBUTE BY x and SORT BY x). You end up with N or more sorted files with non-overlapping ranges.
+So CLUSTER BY is basically the more scalable version of ORDER BY.  
 ###Regular expressions in hive?  
-###Different join methods in Hive(using distributed Chace)?  
+###Different join methods in Hive(using distributed Chace) and turning Hive queries for Small table, Big table using Distributed cache?   
   
   
 #Sqoop  
 ###How to Import and export Data using Sqoop?  
-###Does sqoop launches only mapper? Yes  
+###Does sqoop launches only mapper?  
+Yes, Sqoop lauches only Mappers to import and Export Data.  
   
   
 #HDFS  
-###What is splittablity and block compression and How does it effects different file formats like CSV, JSON, XML, AVRO and Parquet?
+###What is splittablity and block compression and How does it effects different file formats like CSV, JSON, XML, AVRO and Parquet?  
 ###Falut Tolerence and high availability in HDFS?(Replication and Speculative execution)  
   
   
