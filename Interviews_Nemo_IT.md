@@ -237,3 +237,4 @@ Different join methods in Hive(using distributed Chace)?
 Difference between an RDD and DataFrame?  
 Does sqoop launches only mapper? Yes  
 What are broadcast and Accumulator variables in Spark?  
+How to create Streams for Basic Input SOurces like file and Socket & Advanced Sources like Kafka, Twitter and Flume?  
