@@ -1,4 +1,4 @@
-#General
+#General  
   
 ###Brief the resume?  
 I’m a Hadoop Developer with hands on experience in performing Data Analytics using Hadoop components like Spark, SparkSQL, Spark-Streaming, Hive and Impala with in-depth understanding of Hadoop Map-reduce and distributed file systems architecture. I have mainly worked on Parsing, filtering and Manipulating different kinds of Semi-Structured, Unstructured and Structured data.  
@@ -46,10 +46,100 @@ Master Data Management(MDM) solutions that focus on managing analytical master d
   
 Analytical Big Data technologies, on the other hand, are useful for retrospective, sophisticated analytics of your data. Hadoop is the most popular example of an Analytical Big Data technology.  
   
+How WebLog and Transaction information to be processed by Big Data is Generated(Data Sources People(Social Media), Machines(WebLogs), Organisation(Transactions))?  
+Yarn Resources and peformane tuning?  
+Tablue data vizulalization?  
+Difference between object, method, functions and classes in Java?(Objects are instances of classes, whose class Functions can be acssed as methods)  
+Difference between public, private and default value decrelation in Java?  
+is val and var public, private and default decrelation in Scala?  
+Use of Some() KeyWord in Scala?  
+deceralation of public, private and default types in python?  
+Changing file permissions in Shell Scripting?  
+What is DML and DDL?(A)  
+Primary key vs unique key in SQL?(A)  
+What is the advantage of a Parquet file?(A)  
+Difference between a Data Engineer, Data Analyst and Data Scientist?  
+Type of Analytics Done on Big Data?(Descriptive, priscriptive, pridictive)  
+  
+  
 #MapReduce  
+  
+Map/reduce if 1st file had empId and empName & 2nd file empId and empSalary. How to find the max salary empId? How many mappers are launched?(A)  
+Explaine Map/Reduce process?  
+  
+  
 #Spark  
-##SparkCore
-##SparkSQL
-##SparkStreaming
+  
+##SparkCore  
+Difference between Map-reduce and spark? Advantages and disadvantages and execution methods?(A)  
+What are the disadvantages of using Apache Spark over Hadoop MapReduce?(A)  
+Define a worker node?(A)  
+What is a lineage Map in Spark?  
+Explain about the core components of a distributed Spark application?(A)  
+What do you understand by Executor Memory in a Spark application?(A)  
+How to enable speculative execution in spark?(A)  
+Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
+Adding other jars(thrid party) in spark when execution in spark-submit?  
+How can you minimize data transfers when working with Spark?(A)  
+Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?(A)  
+Why is Spark conf and spark context related to the program?  
+What is an RDD in spark?(Chapter 3 Spark Data Analytics cook book)(A)  
+Why the Data needs to serialised in Spark?  
+Difference between action and transformation?  
+When to use map and flat map in spark?(A)  
+What is a Sparse Vector?(A)  
+UDFs in Spark?  
+What do you understand by Pair RDD?(A)  
+Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
+Adding other jars(thrid party) in spark when execution in spark-submit?  
+What are broadcast and Accumulator variables in Spark?  
+  
+##SparkSQL  
+Difference between an RDD and DataFrame?  
+What do you understand by SchemaRDD?(A)  
+Case class in SparkSQL?  
+Data preparation methods in SparkSQL?(Chapter 3 Spark Data Analytics cook book)  
+How can you remove the elements with a key present in any other RDD?(A)  
+  
+##SparkStreaming  
+Explain the Process of Spark Streaming?  
+What is a DStream?(A)  
+Explain about the different types of transformations on DStreams?(A)  
+What is the difference between persist() and cache()?(A)  
+Explain Specific Streaming process and saving files to HDFS in SparkStreaming with Kafka?  
+How to create Streams for Basic Input SOurces like file and Socket & Advanced Sources like Kafka, Twitter and Flume?  
+  
+  
 #Hive and Impala  
-#Comparision  
+  
+Difference between Impala and Hive?  
+Disadvantages of Impala?(speculative execution)  
+What are the kind of tables used in Hive?Why?(A)  
+What is Partioning and bucketing in hive & Partionting and Bucketing difference?(A)  
+Partioning External Table in Hive?(A)  
+DIfference between where and having clauses?(A)  
+select * from Data?(A)  
+where = "" ?(A)  
+Group by = "" ?(A)  
+UDF's in Hive and Hwo do you Implement it and How to load UDF's in Hive?  
+Invalidate metaData command in Impala?  
+How to change default Heap Dump memory parameters in Hive using set command?  
+Difference between Map side and reduce side joins?  
+Difference between GroupBy, OrderBy, sortBy, DISTRIBUTE BY and CLUSTER BY x?(A)  
+Regular expressions in hive?  
+Different join methods in Hive(using distributed Chace)?  
+  
+  
+#Sqoop  
+How to Import and export Data using Sqoop?  
+Does sqoop launches only mapper? Yes  
+  
+  
+#HDFS  
+What is splittablity and block compression and How does it effects different file formats like CSV, JSON, XML, AVRO and Parquet?
+Falut Tolerence and high availability in HDFS?(Replication and Speculative execution)  
+  
+  
+#Cassandra   
+Explain Cassandra Arcitecture and timeStamps methods in it?  
+
