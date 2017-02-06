@@ -32,6 +32,19 @@ The Data collected in HDFS is Processed using Hive, Impala and Spark to Load Rec
 The ability to extract information from operational data in real time is critical for a modern, agile enterprise. The faster you can harness insights from data, the greater your advantage in driving revenue, reducing costs, and increasing efficiency. Modern architecture for real time big data combines Hadoop and NoSQL. Hadoop is engineered for big data analytics, but it’s not real time. NoSQL is engineered for real-time big data, but it’s operational rather than analytical. NoSQL together with Hadoop is the key to real time big data.  
   
 ###What are operational and analytical operations?  
+Operational Data  
+A company's operations are supported by applications that automate key business processes. These include areas such as sales, service, order management, manufacturing, purchasing, billing, accounts receivable and accounts payable. These applications require significant amounts of data to function correctly.  This includes data about the objects that are involved in transactions, as well as the transaction data itself.  For example, when a customer buys a product, the transaction is managed by a sales application.  The objects of the transaction are the Customer and the Product.  The transactional data is the time, place, price, discount, payment methods, etc. used at the point of sale. The transactional data is stored in On-Line Transaction Processing (OLTP) tables that are designed to support high volume low latency access and update.  
+  
+MDM solutions that focus on managing operational master data supporting transactional applications are called Operational MDM. They rely heavily on integration technologies. They bring real value to the enterprise, but lack the ability to influence reporting and analytics.   
+Operational Big Data systems provide operational features to run real-time, interactive workloads that ingest and store data. Cassandra is a top technology for operational Big Data applications with over 10 million downloads of its open source software.  
+  
+Analytical Data  
+Analytical data is used to support a company's decision making.  Customer buying patterns are analyzed to identify churn, profitability, and marketing segmentation. Suppliers are categorized, based on performance characteristics over time, for better supply chain decisions. Product behavior is scrutinized over long periods to identify failure patterns.  This data is stored in large Data Warehouses and possibly smaller data marts with table structures designed to support heavy aggregation, ad hoc queries, and data mining. Typically the data is stored in large fact tables surrounded by key dimensions such as customer, product, supplier, account, and location.  
+  
+MDM solutions that focus on managing analytical master data are called Analytical MDM. They focus on providing high quality dimensions with their multiple simultaneous hierarchies to data warehousing and BI technologies. They also bring real value to the enterprise, but lack the ability to influence operational systems. Any data cleansing done inside an Analytical MDM solution is invisible to the transactional applications and transactional application knowledge is not available to the cleansing process. Because Analytical MDM systems can do nothing to improve the quality of the data under the heterogeneous application landscape, poor quality inconsistent domain data finds its way into the BI systems and drives less than optimum results for reporting and decision making.  
+  
+Analytical Big Data technologies, on the other hand, are useful for retrospective, sophisticated analytics of your data. Hadoop is the most popular example of an Analytical Big Data technology.  
+  
 #MapReduce  
 #Spark  
 ##SparkCore
