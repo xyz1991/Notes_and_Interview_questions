@@ -235,3 +235,4 @@ Adding other jars(thrid party) in spark when execution in spark-submit?
 How to enable Speculative execution in Spark?  
 Different join methods in Hive(using distributed Chace)?  
 Difference between an RDD and DataFrame?  
+Does sqoop launches only mapper? Yes  
