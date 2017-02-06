@@ -236,3 +236,4 @@ How to enable Speculative execution in Spark?
 Different join methods in Hive(using distributed Chace)?  
 Difference between an RDD and DataFrame?  
 Does sqoop launches only mapper? Yes  
+What are broadcast variables in Spark?  
