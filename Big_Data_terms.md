@@ -36,8 +36,12 @@ In-memory computing: In general, any computing that can be done without accessin
 
 IoT: The latest buzzword is Internet of Things or IOT. IOT is the interconnection of computing devices in embedded objects (sensors, wearables, cars, fridges etc.) via internet and they enable sending / receiving data. IOT generates huge amounts of data presenting many big data analytics opportunities.
  
-Machine learning: Machine learning is a method of designing systems that can learn, adjust, and improve based on the data fed to them. Using predictive and statistical algorithms that are fed to these machines, they learn and continually zero in on "correct" behavior and insights and they keep improving as more data flows through the system. Fraud detection, online recommendations based
- 
+Machine learning: Machine learning is a method of designing systems that can learn, adjust, and improve based on the data fed to them. Using predictive and statistical algorithms that are fed to these machines, they learn and continually zero in on "correct" behavior and insights and they keep improving as more data flows through the system. Fraud detection, online recommendations based  
+  
+<p align="center">
+  <img src="https://www.dropbox.com/s/7ck2nqyprprkdq0/Machine_Learning.PNG?raw=1" width="650"/>
+</p>  
+  
 MapReduce: MapReduce could be little bit confusing but let me give it a try. MapReduce is a programming model and the best way to understand this is to note that Map and Reduce are two separate items. In this, the programming model first breaks up the big data dataset into pieces (in technical terms into ‘tuples’ but let’s not get too technical here) so it can be distributed across different computers in different locations (i.e. cluster computing described earlier) which is essentially the Map part. Then the model collects the results and ‘reduces’ them into one report. MapReduce’s data processing model goes hand-in-hand with hadoop’s distributed file system.
  
 NoSQL: It almost sounds like a protest against ‘SQL (Structured Query Language) which is the bread-and-butter for traditional Relational Database Management Systems (RDBMS) but NOSQL actually stands for Not ONLY SQL :-). NoSQL actually refers to database management systems that are designed to handle large volumes of data that does not have a structure or what’s technically called a ‘schema’ (like relational databases have). NoSQL databases are often well-suited for big data systems because of their flexibility and distributed-first architecture needed for large unstructured databases.
