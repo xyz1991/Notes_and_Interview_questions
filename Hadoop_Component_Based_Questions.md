@@ -259,6 +259,7 @@ DISTRIBUTE BY x: ensures each of N reducers gets non-overlapping ranges of x, bu
 CLUSTER BY x: ensures each of N reducers gets non-overlapping ranges, then sorts by those ranges at the reducers. This gives you global ordering, and is the same as doing (DISTRIBUTE BY x and SORT BY x). You end up with N or more sorted files with non-overlapping ranges.
 So CLUSTER BY is basically the more scalable version of ORDER BY.  
 ###Regular expressions in hive?  
+###How to Query Avro struct, Array and key:value pairs in a Hive table?  
 ###Different join methods in Hive(using distributed Chace) and turning Hive queries for Small table, Big table using Distributed cache?   
   
   
