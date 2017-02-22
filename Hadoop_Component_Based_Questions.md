@@ -194,6 +194,7 @@ Use the subtractByKey () function
 Discretized Stream is a sequence of Resilient Distributed Databases that represent a stream of data. DStreams can be created from various sources like Apache Kafka, HDFS, and Apache Flume. DStreams have two operations –  
 Transformations that produce a new DStream.  
 Output operations that write data to an external system.  
+###Explain about Batch Interval, Windows size and Sliding Interval? How are these related to DStream processing?  
 ###Explain about the different types of transformations on DStreams?  
 Stateless Transformations- Processing of the batch does not depend on the output of the previous batch. Examples – map (), reduceByKey (), filter ().  
 Stateful Transformations- Processing of the batch depends on the intermediary results of the previous batch. Examples –Transformations that depend on sliding windows.  
