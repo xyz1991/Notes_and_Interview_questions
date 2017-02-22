@@ -195,6 +195,12 @@ Discretized Stream is a sequence of Resilient Distributed Databases that represe
 Transformations that produce a new DStream.  
 Output operations that write data to an external system.  
 ###Explain about Batch Interval, Windows size and Sliding Interval? How are these related to DStream processing?  
+Batch Interval - The interval for which a DStream is created. This is provided while creating the Streaming Context.  
+Window Duration/Size - The window duration over which a certain fold operation needs to be performed. Should be a multiple of batch interval  
+Sliding Interval - The interval over which the window should be slided. Should be a multiple of batch interval  
+The number of records in one batch is determined by the batch interval. A window will keep the number of batches as fit within the size of a window, that's why the window size must be a multiple of the batch interval. Your operations will then run on multiple batches, and with each new batch the window will move forward, discarding older batches.  
+The point is that in streaming, data that belongs together doesn't necessarily arrive at the same time, especially at low batch intervals. With windows you are essentially looking back in time.  
+But note that your job still runs at the specified batch interval, so it will produce output at the same pace as before but look at more data at once. You will also look at the same data multiple times!  
 ###Explain about the different types of transformations on DStreams?  
 Stateless Transformations- Processing of the batch does not depend on the output of the previous batch. Examples – map (), reduceByKey (), filter ().  
 Stateful Transformations- Processing of the batch depends on the intermediary results of the previous batch. Examples –Transformations that depend on sliding windows.  
