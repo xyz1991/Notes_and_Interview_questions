@@ -169,6 +169,7 @@ Resilient – If a node holding the partition fails the other node takes the dat
 ###When to use map and flat map in spark?  
 map for each Tuple or row level operations. Does one to one mapping operations.  
 flat map for whole document level operations. Does one to none or one to many mapping operations.  
+###what is coalesce and repartition spark?  
 ###What is a Sparse Vector?  
 A sparse vector has two parallel arrays –one for indices and the other for values. These vectors are used for storing non-zero entries to save space.  
 ###UDFs in Spark?  
