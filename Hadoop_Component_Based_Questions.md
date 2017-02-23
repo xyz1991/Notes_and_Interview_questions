@@ -180,6 +180,10 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
 ###What are broadcast and Accumulator variables in Spark?  
   
 ##SparkSQL  
+###How to create a DataFrame from an RDD?  
+existing RDD by mapping each line to a row record and then saving the transformed RDD to a DataFrame.  
+from a Hive Table.  
+from a Data Source.  
 ###Difference between an RDD and DataFrame?  
 ###What do you understand by SchemaRDD?  
 An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
