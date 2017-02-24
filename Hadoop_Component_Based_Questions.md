@@ -100,6 +100,20 @@ Parquet file is a columnar format file that helps –
 Limit I/O operations  
 Consumes less space  
 Fetches only required columns.  
+###What is MVC architecture(model-view-controller)?  
+As with other software architectures, MVC expresses the "core of the solution" to a problem while allowing it to be adapted for each system. Particular MVC architectures can vary significantly from the traditional description here.  
+Components:  
+The model is the central component of the pattern. It expresses the application's behavior in terms of the problem domain, independent of the user interface. It directly manages the data, logic and rules of the application.  
+A view can be any output representation of information, such as a chart or a diagram. Multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants.  
+The third part, the controller, accepts input and converts it to commands for the model or view.  
+<p align="center">
+  <img src="https://www.dropbox.com/s/fl82wi3d88mymg4/MVC-basic.svg.png?raw=1" width="650"/>
+</p>  
+Interactions:    
+In addition to dividing the application into three kinds of components, the model–view–controller design defines the interactions between them.  
+A model stores data that is retrieved according to commands from the controller and displayed in the view.  
+A view generates new output to the user based on changes in the model.  
+A controller can send commands to the model to update the model's state (e.g., editing a document). It can also send commands to its associated view to change the view's presentation of the model (e.g., scrolling through a document).  
 ###Difference between a Data Engineer, Data Analyst and Data Scientist?  
 ###Type of Analytics Done on Big Data?   
 Descriptive Analytics: If you just told me that you spent 25% on food, 35% on clothing, 20% on entertainment and the rest on miscellaneous items last year using your credit card, that is descriptive analytics. Of course, you can go into lot more detail as well.
