@@ -85,7 +85,7 @@ Examples: SELECT, UPDATE, INSERT statements
   
 DDL is abbreviation of Data Definition Language. It is used to create and modify the structure of database objects in database.
 Examples: CREATE, ALTER, DROP statements  
-###Primary key vs unique key in SQL?  
+###Primary key vs unique key vs logical key vs foregn key in SQL?  
 Primary Key:  
 Can be only one in a table  
 In some DBMS it cannot be NULL - e.g. MySQL adds NOT NULL  
@@ -95,6 +95,10 @@ Can be more than one unique key in one table
 Unique key can have null values  
 It can be a candidate key  
 Unique key can be null and may not be unique  
+Logical Key:  
+A logical Key is a key that the "real world" might use to look up a row. Often we add "UNIQUE" constraint to a logical key.  
+Foreign Key:  
+A foreign key is usually a number that points to the primary key of an associated row in a different table.  
 ###What is the advantage of a Parquet file?  
 Parquet file is a columnar format file that helps –  
 Limit I/O operations  
