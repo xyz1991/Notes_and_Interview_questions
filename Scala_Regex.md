@@ -25,4 +25,5 @@ val match1 = numPattern.findFirstIn(address)
 val matches = numPattern.findAllIn(address)  
 matches.foreach(println)  
 val matches = numPattern.findAllIn(address).toArray  
+val result = numPattern.findFirstIn(address).getOrElse("no match")  
 ```
