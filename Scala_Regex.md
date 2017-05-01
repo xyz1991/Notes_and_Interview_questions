@@ -40,3 +40,11 @@ p1: String = 925
 p2: String = 555  
 p3: String = 1943    
 ```
+(OR)  
+```scala
+val string = "one493two483three"
+val pattern = """two(\d+)three""".r
+pattern.findAllIn(string).matchData foreach {
+   m => println(m.group(1))
+}
+```
