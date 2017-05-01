@@ -1,4 +1,4 @@
-##Interview#4
+## Interview#4  
 What is star schema?  
 Difference between Machine Learning, Data Science, AI, Deep Learning, and Statistic?  
 Joins pocedure in Map/Reduce?  
