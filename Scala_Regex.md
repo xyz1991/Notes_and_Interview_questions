@@ -27,3 +27,16 @@ matches.foreach(println)
 val matches = numPattern.findAllIn(address).toArray  
 val result = numPattern.findFirstIn(address).getOrElse("no match")  
 ```
+(OR)  
+```scala
+scala> val s = "Frank,123 Main,925-555-1943,95122"  
+s: String = Frank,123 Main,925-555-1943,95122  
+  
+scala> val p = """.*,(\d{3})-(\d{3})-(\d{4}),.*""".r  
+p: scala.util.matching.Regex = .*,(\d{3})-(\d{3})-(\d{4}),.*  
+  
+scala> val p(p1,p2,p3) = s  
+p1: String = 925  
+p2: String = 555  
+p3: String = 1943    
+```
