@@ -301,6 +301,18 @@ So CLUSTER BY is basically the more scalable version of ORDER BY.
   
 # Sqoop  
 ### How to Import and export Data using Sqoop?  
+Creation of External table : External tables in hive are kind of permanent tables and stays there even if hive is stopped or server goes down. "EXTERNAL" keyword is used to specify table type.  
+  
+CREATE EXTERNAL TABLE IF NOT EXISTS HIVEDB.HIVE_TABLE1 (DATE_COL DATE,   
+BIG_INT_COL BIGINT, INT_COL INT, VARCHAR_COL VARCHAR(221), FLOAT_COL FLOAT);  
+Import the data using Sqoop : Specify the created table name while importing the data, instead of using "--hive-create" option.  
+  
+sqoop import --connect jdbc:mysql://mysqlhost/mysqldb --username user --password   
+passwd --query "SELECT table1.date_col, table1.big_int_col, table1.int_col,   
+table1.varchar_col, table1.float_col FROM MYSQL_TABLE1 AS table1 WHERE   
+\$CONDITIONS" --split-by table1.date_col --hive-import   
+--hive-table hivedb.hive_table1 --target-dir hive_table1_data`  
+  
 ### Does sqoop launches only mapper?  
 Yes, Sqoop lauches only Mappers to import and Export Data.  
   
