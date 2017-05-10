@@ -301,6 +301,7 @@ So CLUSTER BY is basically the more scalable version of ORDER BY.
   
 # Sqoop  
 ### How to Import and export Data using Sqoop?  
+#### Sqoop Import
 Creation of External table : External tables in hive are kind of permanent tables and stays there even if hive is stopped or server goes down. "EXTERNAL" keyword is used to specify table type.  
   
 CREATE EXTERNAL TABLE IF NOT EXISTS HIVEDB.HIVE_TABLE1 (DATE_COL DATE,   
