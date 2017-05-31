@@ -18,6 +18,34 @@ import scala.util.matching.Regex
 "milk, tea, muck" replaceFirst ("m[^ ]+k", "coffee")  
 ```  
 ## Grouping & Extracting  
+```scala  
+val l: List[String] = List(  
+    """<?xml version="1.0" encoding="utf-8"?>""",  
+    """<weatherdata>""", "  <location>",  
+    "    <name>Whitby</name>",  
+    "    <type/>",  
+    "    <country>GB</country>",  
+    "    <timezone/>",  
+    "    <name>Whitby1</name>",  
+    "    <name>Whitby2</name>",  
+    """    <location altitude="0" latitude="54.48774" longitude="-0.61498" geobase="geonames" geobaseid="0"/>""",  
+    "  </location>", "  <credit/>")  
+  def getChild(tag:String)={  
+    val pattern = ".*>(\\w+)?</.*>(\\w+)?</.*>(\\w+)?</.*".r  
+    val match_string = (l.map(line => line.trim)  
+      .filter(line => line.contains("<%s>".format(tag)))).mkString("")  
+    var regex_list: List[String] = List();  
+    pattern.findAllIn(match_string).matchData.foreach{  
+      m => {  
+        regex_list = regex_list:::m.subgroups  
+      }  
+    }  
+    regex_list  
+  }  
+  val cityName = getChild("name")  
+  print(cityName.mkString(" "))  
+```
+(ALternatives)  
 ```scala
 val numPattern = "[0-9]+".r  
 val address = "123 Main Street Suite 101"  
