@@ -19,7 +19,8 @@ import scala.util.matching.Regex
 ```  
 ## Grouping & Extracting  
 ```scala  
-val l: List[String] = List(  
+  val url = "http://api.openweathermap.org/data/2.5/forecast?mode=xml&lat=55&lon=0"  
+  val l: List[String] = List(  
     """<?xml version="1.0" encoding="utf-8"?>""",  
     """<weatherdata>""", "  <location>",  
     "    <name>Whitby</name>",  
@@ -30,20 +31,23 @@ val l: List[String] = List(
     "    <name>Whitby2</name>",  
     """    <location altitude="0" latitude="54.48774" longitude="-0.61498" geobase="geonames" geobaseid="0"/>""",  
     "  </location>", "  <credit/>")  
-  def getChild(tag:String)={  
-    val pattern = ".*>(\\w+)?</.*>(\\w+)?</.*>(\\w+)?</.*".r  
+  def getChild(tag:String, pattern: Regex)={  
     val match_string = (l.map(line => line.trim)  
       .filter(line => line.contains("<%s>".format(tag)))).mkString("")  
+    println(match_string)  
     var regex_list: List[String] = List();  
     pattern.findAllIn(match_string).matchData.foreach{  
       m => {  
+        println(m.group(1))  
         regex_list = regex_list:::m.subgroups  
       }  
     }  
     regex_list  
   }  
-  val cityName = getChild("name")  
-  print(cityName.mkString(" "))  
+  val cityName = getChild("name", ".*>(\\w+)?</.*>(\\w+)?</.*>(\\w+)?</.*".r)  
+  println(cityName.mkString(" "))  
+  val countryName = getChild("country", ".*>(\\w+)?</.*".r)  
+  println(countryName.mkString(" "))  
 ```
 (ALternatives)  
 ```scala
