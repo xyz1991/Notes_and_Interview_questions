@@ -64,7 +64,8 @@ set avro.output.codec=snappy;
 ### Difference between object, method, functions and classes in Java?(Objects are instances of classes, whose class Functions can be acssed as methods)  
 ### Difference between public, private and default value decrelation in Java?  
 ### is val and var public, private and default decrelation in Scala?  
-### Use of Some() KeyWord in Scala?  
+### Use of Some() KeyWord in Scala? 
+```Scala
 def toInt(in: String): Option[Int] = {  
 try {  
 Some(Integer.parseInt(in.trim))  
@@ -76,6 +77,7 @@ toInt(someString) match {
 case Some(i) => println(i)  
 case None => println("That didn't work.")  
 }  
+```
 Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
 ### deceralation of public, private and default types in python?  
 ### Changing file permissions in Shell Scripting?  
