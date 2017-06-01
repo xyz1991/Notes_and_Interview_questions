@@ -245,7 +245,7 @@ val schema = StructType(SchemaString.split(",").map(fieldName =>
                         fieldName, StringType, true  
                         )))  
 val rowRDD = empFrameWithRenamedColumns.map(_.split(",")).map(p => Row(p(0).toInt, p(1)))  
-val empDataFrame = sqlContext.createDataFrame(rowRDD, Schema)  
+val empDataFrame = sqlContext.createDataFrame(rowRDD, schema)  
 ```
 ### Difference between an RDD and DataFrame?  
 ### What do you understand by SchemaRDD?  
