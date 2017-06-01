@@ -206,8 +206,47 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
 ## SparkSQL  
 ### How to create a DataFrame from an RDD?  
 existing RDD by mapping each line to a row record and then saving the transformed RDD to a DataFrame.  
+Way to create the dataframe:  
 from a Hive Table.  
-from a Data Source.  
+from a Data Source opened by sqlcontext.  
+Using toDF() and createDataFrame() from an rdd.  
+### Difference between toDF() and createDataFrame() methods for creating DataFrames?  
+When case class is provide it would be useful to import sqlcontext.implicits._ and use toDF() method to convert rdds to dataframes.  
+BUT  
+When you declared schema using StructType and StructField its usefule to create dataframes using createDataFrame  
+Using toDF():  
+```Scala
+case class Data(ID:String, infect:String, induct:String,	adult:String)  
+import sqlContext.implicits._  
+val CSV_files_DF = CSV_files.map(  
+      line => line.split(",")  
+    ).map(line => Data(line(0),  
+    line(1), line(2),  
+    line(3))).toDF()  
+```
+Using createDataFrame():  
+Using case class:  
+```Scala
+case class Trans(accNo: String, tranAmount: Double)  
+val acTransRDD =  
+      sc.parallelize(acTransList).map(_.split(",")).map(  
+        line => Trans(line(0), line(1).trim.toDouble)  
+      )  
+val acTransDF = sqlContext.createDataFrame(acTransRDD)  
+```
+Using Programatic schema:  
+```Scala
+val empFrameWithRenamedColumns = sc.textFile("Path_to_CSVFile")  
+val SchemaString = "Emp_ID,Emp_name"  
+import org.apache.spark.sql.Row  
+import org.apache.spark.sql.types.{StringType, StructField, StructType}  
+val schema = StructType(SchemaString.split(",").map(fieldName =>  
+                        StructField(  
+                        fieldName, StringType, true  
+                        )))  
+val rowRDD = empFrameWithRenamedColumns.map(_.split(",")).map(p => Row(p(0).toInt, p(1)))  
+val empDataFrame = sqlContext.createDataFrame(rowRDD, Schema)  
+```
 ### Difference between an RDD and DataFrame?  
 ### What do you understand by SchemaRDD?  
 An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
