@@ -216,7 +216,7 @@ BUT
 When you declared schema using StructType and StructField its usefule to create dataframes using createDataFrame  
 Using toDF():  
 ```Scala
-case class Data(ID:String, infect:String, induct:String,	adult:String)  
+case class Data(ID:String, infect:String, induct:String, adult:String)  
 import sqlContext.implicits._  
 val CSV_files_DF = CSV_files.map(  
       line => line.split(",")  
