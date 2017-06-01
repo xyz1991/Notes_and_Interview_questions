@@ -190,6 +190,36 @@ Immutable – RDDs cannot be altered.
 Resilient – If a node holding the partition fails the other node takes the data.  
 ### Why the Data needs to serialised in Spark?  
 ### Difference between action and transformation?  
+### How to use wholeTextFiles() and textFile(), using union() in sparkContext()?  
+```Scala
+val text_file1 = sc.wholeTextFiles("""C:\\Users\\korivi\\Downloads\\numbertextdirectory""")  
+val text_file2 = sc.wholeTextFiles("""C:\\Users\\korivi\\Downloads\\tabletextdirectory""")  
+sc.union(Seq(text_file1,text_file2)).foreach(line => println(line._1))   
+```
+  
+```Scala   
+val text_file1 = sc.textFile("""C:\\Users\\korivi\\Downloads\\numbertextdirectory\\*.txt""")  
+val text_file2 = sc.textFile("""C:\\Users\\korivi\\Downloads\\tabletextdirectory\\*.txt""")  
+sc.union(Seq(text_file1,text_file2)).foreach(line => println(line))  
+```
+  
+### Use the union operations in RDD to merge RDD's in iterative mode?  
+```Scala
+  val conf = new SparkConf()  
+    .setAppName("WordCount")  
+    .setMaster("local")  
+  val sc = new SparkContext(conf)  
+  var totalunionRDD: RDD[String] = sc.emptyRDD  
+  //Read some example file to a test RDD  
+  val list: List[String] = List("tabletextdirectory", "numbertextdirectory")  
+  for(element <- list){  
+    val present_csvfile = sc.textFile("C:\\Users\\korivi\\Downloads\\%s\\*".format(element))  
+    totalunionRDD = totalunionRDD.union(present_csvfile)  
+  }  
+  //Displaying the RDD  
+  totalunionRDD.foreach(line => println(line))  
+  ```
+
 ### When to use map and flat map in spark?  
 map for each Tuple or row level operations. Does one to one mapping operations.  
 flat map for whole document level operations. Does one to none or one to many mapping operations.  
