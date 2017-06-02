@@ -78,6 +78,7 @@ case Some(i) => println(i)
 case None => println("That didn't work.")  
 }  
 ```
+Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
 ### File input and output operations and redirecting console output and handling Exceptions in Scala?  
 ```Scala
 object Scala_practise extends App{  
@@ -119,7 +120,6 @@ object Scala_practise extends App{
   ps.close()  
 }  
 ```
-Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
 ### deceralation of public, private and default types in python?  
 ### Changing file permissions in Shell Scripting?  
 ### What is DML and DDL?  
