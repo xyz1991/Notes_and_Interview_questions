@@ -78,6 +78,47 @@ case Some(i) => println(i)
 case None => println("That didn't work.")  
 }  
 ```
+### File input and output operations and redirecting console output and handling Exceptions in Scala?  
+```Scala
+object Scala_practise extends App{  
+  val file = new File("text.txt")  
+  var i = 0  
+  //Redirecting the Console Output and handling Exceptions  
+  try {  
+    val Outputfile = new File("output.txt")  
+    val ps = new PrintStream(new FileOutputStream(Outputfile, true))  
+    System.setOut(ps)  
+  }  
+  catch {  
+    case ex: Exception =>{  
+      ex.printStackTrace()  
+      System.exit(1)  
+    }  
+  }  
+  //Writing to a text file using PrintWriter and FileOutputStream in append mode  
+  while (!file.exists()|| i<11){  
+    val printWriter = new PrintWriter(new FileOutputStream(file, true))  
+    printWriter.println("Korivi, Ranga Nanda Kishore")  
+    printWriter.println("This is %d writing".format(i))  
+    printWriter.close()  
+    i += 1  
+  }  
+  //reading the contents of a text file using Scanner  
+  if(file.exists()){  
+    val scanner = new Scanner(new FileInputStream(file))  
+    while (scanner.hasNext()){  
+      println(scanner.nextLine())  
+    }  
+    scanner.close()  
+  }  
+  //reading the contents of a text file using Source Class in Scala  
+  for(line <- Source.fromFile(file).getLines()){  
+    println(line)  
+  }  
+  //closing the console output PrintStream object  
+  ps.close()  
+}  
+```
 Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
 ### deceralation of public, private and default types in python?  
 ### Changing file permissions in Shell Scripting?  
