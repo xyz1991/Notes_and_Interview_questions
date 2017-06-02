@@ -266,6 +266,44 @@ sc.union(Seq(text_file1,text_file2)).foreach(line => println(line))
 ### When to use map and flat map in spark?  
 map for each Tuple or row level operations. Does one to one mapping operations.  
 flat map for whole document level operations. Does one to none or one to many mapping operations.  
+### Difference between GroupByKey, ReduceByKey, CombineByKey and AggregateByKey?  
+#### GroupByKey:  
+When called on an RDD of (k, v) pairs returns an RDD of (k, Iterable(V)) pairs.  
+RDD's in nodes: [(k1, v1)(k1, v2)] [(k2, v1)(k1, v3)] [(k2, v4)(k1, v3)]  
+RDD's in Driver:  [(k1, v1)(k1, v2)(k1, v3)(k1, v3)]=> (k1,(v1,v2,v3)) [(k2, v1)(k2, v4)]=>(k2, (v1,v4))  
+Ex myPair.groupByKey()  
+#### ReduceByKey:  
+Shuffling in nodes and aggregation in drivers  
+When called on an RDD of (k, v) pairs, returns an RDD of (k,v) pairs where the values for each key are aggregated using the given  
+reduce function. The function should be able to take arguments of same type and it returns same data type as a result.  
+Ex: myPair.reduceByKey{case(a, b)=> a+b}  
+#### CombineByKey:  
+RDD's in nodes:  
+Partition1=> [(Messi,45)(Messi,48)]  
+Partition2=> [(Ronaldo,42)(Messi,54)]  
+Partition3=> [(Ronaldo,52)(Ronaldo,51)]  
+Syntax: myPair.combineByKey(createCombiner, which turns a value into a combiner (e.g., creates a one-element list), /*Shuffel in nodes*/    
+                             mergeValue, to merge a value into a accumulated values (e.g., adds it to the end of a list),  /*Shuffel in nodes*/   
+                             mergeCombiners, combine two or more combiners into a single one./*Driver side operation*/)  
+Ex: myPair.combineByKey((comb:Int)=>(comb), (a:Int, comb:Int)=>(a + comb), (a:Int,b:Int)=>(a+b) )  
+When combineByKey navigates through each element i.e for partition1=>(Messi, 45) it has a key which it has not seen before and when it   moves to next (Messi, 48) it gets a key which it has seen before. When "combineByKey()" sees an element for first time it uses a  
+function  called "createCombiner" to create an initial value for the "accumulator" on the key i.e it use Messi as the key and 45 as   value. So current value of the "accumulator" of that "Key(Messi)" becomes 45.  
+Now, next time combineByKey() sees the same key on the same partition, it does not use "createCombiner" instead it will make use of second function "merge Value" with current value of accumulator (45) and new value (48).  
+Since, all this happens in parallel in different partitions. There is a chance that same key exist on other partition with other set of   "accumulators". So, when results from different partition has to be merged it uses "mergeCombiners" fuction.  
+#### AggregateByKey:  
+For reduceByKey the output needs to be same type has the Input argument.  
+For combineByKey an initial value cannot be provided, but the output type can change from the input arguments type.  
+AggregateByKey overcomes these both disadvantages but doesnot allow type changes to output from input in driver phase(merge combiner).  
+Ex:- dataRDD.aggregateByKey(intial value)((merge values)/*shuffel in nodes*/,  
+                                          (merge combiners)/*Shuffel in Driver*/)  
+Average Computation: babyNamesCSV.aggregateByKey((0, 0))(  
+        (acc, value) => (acc._1 + value, acc._2 + 1),  
+        (acc1, acc2) => (acc1._1 + acc2._1, acc1._2 + acc2._2))  
+    .mapValues(sumCount => 1.0 * sumCount._1 / sumCount._2)  
+    .collect  
+Changing Inputtypes:babyNamesCSV.aggregateByKey(0)  
+                                 ((acc:Int,v:String) => acc+1, (acc1:Int,acc:Int) => acc1+acc2).foreach(println)
+The aggregateByKey gets an "initial value" for each key given by the user and merges the values for the specified key on the same   "partitions" in "merge values". Then shuffles the data to merge the combiners in "merge combiners".  
 ### what is coalesce and repartition spark?  
 ### What is a Sparse Vector?  
 A sparse vector has two parallel arrays –one for indices and the other for values. These vectors are used for storing non-zero entries to save space.  
