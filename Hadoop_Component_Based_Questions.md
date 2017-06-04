@@ -79,6 +79,11 @@ case None => println("That didn't work.")
 }  
 ```
 Used to better handle the exception errors. Can be used to return some other value besides null, in this case, perhaps zero or some other meaningless number.  
+  
+### Opening URL's and getting the data in Scala?  
+io.source.fromURL("URL_String")  
+to get data use io.source.fromURL("URL_String").getLines.toList  
+  
 ### File input and output operations and redirecting console output and handling Exceptions in Scala?  
 ```Scala
 object Scala_practise extends App{  
