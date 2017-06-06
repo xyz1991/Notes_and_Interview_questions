@@ -232,7 +232,6 @@ The most common way is to avoid operations ByKey, repartition or any other opera
 ### Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?  
 Data storage model in Apache Spark is based on RDDs. RDDs help achieve fault tolerance through lineage. RDD always has the information on how to build from other datasets. If any partition of a RDD is lost due to failure, lineage helps build only that particular lost partition.  
 ### Why is Spark conf and spark context related to the program?  
-### Detail about the SparkSession object in Spark 2.0?  
 ### What is an RDD in spark?(Partially anwsred look in Chapter 3 Spark Data Analytics cook book)  
 RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are –  
 Immutable – RDDs cannot be altered.  
@@ -321,6 +320,7 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
 ### What are broadcast and Accumulator variables in Spark?  
   
 ## SparkSQL  
+### Detail about the SparkSession object in Spark 2.0? How does it differs from SQLCONTEXT and HIVECONTEXT?    
 ### How to create a DataFrame from an RDD?  
 existing RDD by mapping each line to a row record and then saving the transformed RDD to a DataFrame.  
 Way to create the dataframe:  
