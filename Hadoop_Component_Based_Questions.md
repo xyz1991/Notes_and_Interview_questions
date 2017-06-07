@@ -321,6 +321,64 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
   
 ## SparkSQL  
 ### Detail about the SparkSession object in Spark 2.0? How does it differs from SQLCONTEXT and HIVECONTEXT?    
+SparkSession provides a single point of entry to interact with underlying Spark functionality and allows programming Spark with DataFrame and DataSet APIs.  
+Spark Session encapsulates SparkConf, SparkContext (or) SQLContext and HiveContext.  
+```Scala
+object Spark_practise {
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder.appName("sparksessionexample").master("local")
+      .enableHiveSupport().getOrCreate()
+    val sc = spark.sparkContext
+    //set new runtime options
+    spark.conf.set("spark.sql.shuffle.partitions", 6)
+    spark.conf.set("spark.executor.memory", "2g")
+    //get all settings
+    val configMap:Map[String, String] = spark.conf.getAll
+    for((k,v)<-configMap){
+      println(k+":-"+v)
+    }
+
+
+    //create a Dataset using spark.range starting from 5 to 100, with increments of 5
+    val numDS = spark.range(5, 100, 5)
+    // reverse the order and display first 5 items
+    numDS.orderBy(desc("id")).show(5)
+    //compute descriptive stats and display them
+    numDS.describe().show()
+    // create a DataFrame using spark.createDataFrame from a List or Seq
+    val langPercentDF = spark.createDataFrame(List(("Scala", 35), ("Python", 30), ("R", 15), ("Java", 20)))
+    //rename the columns
+    val lpDF = langPercentDF.withColumnRenamed("_1", "language").withColumnRenamed("_2", "percent")
+    //order the DataFrame in descending order of percentage
+    lpDF.orderBy(desc("percent")).show()
+
+    // read the json file and create the dataframe
+    val zipsDF = spark.read.json("zips.json")
+    //filter all cities whose population > 40K
+    zipsDF.filter(zipsDF.col("pop") > 40000).show(10)
+    // Now create an SQL table and issue SQL queries against it without
+    // using the sqlContext but through the SparkSession object.
+    // Creates a temporary view of the DataFrame
+    zipsDF.createOrReplaceTempView("zips_table")
+    zipsDF.cache()
+    val resultsDF = spark.sql("SELECT * FROM zips_table limit 10")
+    resultsDF.show(10)
+    //drop the table if exists to get around existing table error
+    spark.sql("DROP TABLE IF EXISTS zips_hive_table")
+    //save as a hive table
+    spark.table("zips_table").write.saveAsTable("zips_hive_table")
+    //make a similar query against the hive table
+    val resultsHiveDF = spark.sql("SELECT city, pop, state, zip FROM zips_hive_table WHERE pop > 40000")
+    resultsHiveDF.show(10)
+
+
+    //fetch metadata data from the catalog
+    spark.catalog.listDatabases.show(false)
+    spark.catalog.listTables.show(false)
+
+  }
+}
+```
 ### How to create a DataFrame from an RDD?  
 existing RDD by mapping each line to a row record and then saving the transformed RDD to a DataFrame.  
 Way to create the dataframe:  
