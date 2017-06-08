@@ -379,12 +379,66 @@ object Spark_practise {
   }
 }
 ```
-### How to create a DataFrame from an RDD?  
-existing RDD by mapping each line to a row record and then saving the transformed RDD to a DataFrame.  
-Way to create the dataframe:  
-from a Hive Table.  
-from a Data Source opened by sqlcontext.  
-Using toDF() and createDataFrame() from an rdd.  
+### Illustrate creation and conversions and File i/o operations between RDD's, DataFrame and DataSet?  
+```Scala
+import org.apache.spark.sql._  
+  
+case class Trans(accNo: String, tranAmount: Double)  
+  
+object spark_git extends App{  
+  
+  //initialising sparksession object  
+  val spark = SparkSession.builder.appName("DataFrame_Programming").master("local").enableHiveSupport().getOrCreate()  
+  
+  //an array of data  
+  val acTransList = Array("SB10001,1000", "SB10002,1200", "SB10003,8000", "SB10004,400", "SB10005,300", "SB10006,10000",  "SB10007,500", "SB10008,56", "SB10009,30","SB10010,7000", "CR10001,7000","SB10002,-10")  
+  
+  //creation of RDD from a collection  
+  val acTransRDD = spark.sparkContext.parallelize(acTransList)  
+  //creation of RDD from a textfile  
+  val textFile = spark.sparkContext.textFile("hdfs://<location in HDFS>")  
+  
+  //creation of DataFrame from a DataSource  
+  val acTransDFfromParquet = spark.read.parquet("scala.trans.parquet")  
+  //creation of DataFrame from a RDD  
+  import spark.implicits._  
+  val acTransDF = acTransRDD.map(_.split(","))  
+    .map(line => Trans(line(0), line(1).trim.toDouble)).toDF()  
+  //or  
+  //val acTransDF = spark.createDataFrame(acTransRDD.map(_.split(","))  
+  // .map(line => Trans(line(0), line(1).trim.toDouble)))  
+  
+  
+  //creation of DataSet from a DataSource  
+  val acTransDS1= spark.read.parquet("scala.trans.parquet").as[Trans]  
+  //creation of DataSet from an RDD  
+  import spark.implicits._  
+  val acTransDS = acTransRDD.map(_.split(","))  
+    .map(line => Trans(line(0), line(1).trim.toDouble)).toDS()  
+  //Manipulation of Dataset  
+  acTransDS.filter(row => row.tranAmount>0&&row.accNo.startsWith("SB"))  
+    .show(acTransDS.count.toInt)  
+  //creation of Dataset from a DataFrame  
+  //This type of conversion is really required when reading data from  
+  //external sources such as JSON, Avro or Parquet files.  
+  //simiral to spark.read.json("Path/tofile.json").as[Trans]  
+  val acTransDF_DS = acTransDF.as[Trans]  
+    
+    
+  //Conversions  
+  //Conversion of DataFrame to rdd  
+  val DF_to_rdd = acTransDF.rdd.map(line=>line.getDouble(1)).reduce(_+_)  
+  //Conversion of DataSet to rdd  
+  acTransDS.rdd.map(row=> List(row.accNo, row.tranAmount)).foreach(println)  
+  //Conversion of DataSet to DataFrame  
+  val acTransDS_DF = acTransDS.toDF()  
+  
+  //writing to files  
+  acTransRDD.saveAsTextFile("Path_to_textFile_Directory")  
+  acTransDF.write.parquet("DF")  
+  acTransDS.write.parquet("DS")  
+}  
+```
 ### Difference between toDF() and createDataFrame() methods for creating DataFrames?  
 When case class is provide it would be useful to import sqlcontext.implicits._ and use toDF() method to convert rdds to dataframes.  
 BUT  
