@@ -7,6 +7,13 @@ Descriptive Analytics: If you just told me that you spent 25% on food, 35% on cl
 Predictive Analytics: If you analyzed your credit card history for the past 5 years and the split is somewhat consistent, you can safely forecast with high probability that next year will be similar to past years. The fine print here is that this is not about ‘predicting the future’ rather ‘forecasting with probabilities’ of what might happen. In Big data predictive analytics, data scientists may use advanced techniques like data mining, machine learning, and advanced statistical processes (we’ll discuss all these terms later) to forecast weather, economy etc.
 
 Prescriptive Analytics: Still using the credit card transactions example, you may want to find out which spending to target (i.e. food, entertainment, clothing etc.) to make a huge impact on your overall spending. Prescriptive analytics builds on predictive analytics by including ‘actions’ (i.e. reduce food or clothing or entertainment) and analyzing the resulting outcomes to ‘prescribe’ the best category to target to reduce your overall spend. You can extend this to big data and imagine how executives can make data-driven decisions by looking at the impacts of various actions in front of them.
+
+<p align="center">
+  <img src="https://www.dropbox.com/s/vyie53g2fchuxmg/analytics_nature.png?raw=1" width="650"/>
+</p>  
+<p align="center">
+  <img src="https://www.dropbox.com/s/md7e6fldnkempp0/analytics_solutions.png?raw=1" width="650"/>
+</p> 
  
 Batch processing: Even though Batch data processing has been around since mainframe days, Batch processing gained additional significance with Big Data given the large datasets that it deals with. Batch data processing is an efficient way of processing high volumes of data where a group of transactions is collected over a period of time. Hadoop, which I’ll describe later, is focused on batch data processing.
  
