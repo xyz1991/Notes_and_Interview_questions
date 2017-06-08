@@ -477,7 +477,30 @@ val rowRDD = empFrameWithRenamedColumns.map(_.split(",")).map(p => Row(p(0).toIn
 val empDataFrame = sqlContext.createDataFrame(rowRDD, schema)  
 ```
 ### Difference between an RDD and DataFrame and DataSet?  
-
+Data Representation:  
+RDD: RDD is a distributed collection of data elements spread across many machines in the cluster. RDDs are a set of Java or Scala   objects representing data.  
+DataFrame: A DataFrame is a distributed collection of data organized into named columns. It is conceptually equal to a table in a   relational database.  
+Dataset: It is an extension of DataFrame API that provides the functionality of – type-safe, object-oriented programming interface of   the RDD API and performance benefits of the Catalyst query optimizer and off heap storage mechanism of a DataFrame API.  
+Compile-time type safety:  
+RDD: RDD provides a familiar object-oriented programming style with compile-time type safety.  
+DataFrame: If you are trying to access the column which does not exist in the table in such case Dataframe APIs does not support   compile-time error. It detects attribute error only at runtime.  
+Dataset: It provides compile-time type safety.  
+Optimization:  
+RDD: No inbuilt optimization engine is available in RDD. When working with structured data, RDDs cannot take advantages of sparks     advance optimizers. For example, catalyst optimizer and Tungsten execution engine. Developers optimize each RDD on the basis of its   attributes.  
+DataFrame: Optimization takes place using catalyst optimizer. Dataframes use catalyst tree transformation framework in four phases.  
+Analyzing a logical plan to resolve references.  
+Logical plan optimization.  
+Physical planning.  
+Code generation to compile parts of the query to Java bytecode.  
+Dataset: It includes the concept of Dataframe Catalyst optimizer for optimizing query plan.  
+Garbage Collection:  
+RDD: There is overhead for garbage collection that results from creating and destroying individual objects.  
+DataFrame: Avoids the garbage collection costs in constructing individual objects for each row in the dataset.  
+Dataset: There is also no need for the garbage collector to destroy object because serialization  
+takes place through Tungsten. That uses off heap data serialization.  
+Usage:  
+RDD:Can be used whenever there is a need to process any kind to data with very high flexibility in terms of the data processing     requirements and having the lowest API level control such as library development, the RDD-based programming model is ideal.  
+DataFrame&DataSet: Whenever there is a need to process structured data with flexibility for accessing and processing data with optimized  performance across all the supported programming languages, the DataFrame-based SparkSQL programming model is ideal.  
 ### Illustrate application of map and reduce(Action and Transformations) on DataFrames and DataSets?  
 On DataFrames:  
 ```Scala
