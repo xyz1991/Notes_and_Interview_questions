@@ -476,7 +476,17 @@ val schema = StructType(SchemaString.split(",").map(fieldName =>
 val rowRDD = empFrameWithRenamedColumns.map(_.split(",")).map(p => Row(p(0).toInt, p(1)))  
 val empDataFrame = sqlContext.createDataFrame(rowRDD, schema)  
 ```
-### Difference between an RDD and DataFrame?  
+### Difference between an RDD and DataFrame and DataSet?  
+
+### Illustrate application of map and reduce(Action and Transformations) on DataFrames and DataSets?  
+On DataFrames:  
+```Scala
+val variable = DataFrame.map(row =>row.getAs[Col_Type]("Column_name")).reduce(_ + _)  
+```
+On DataSet:  
+```Scala
+val sumAmount = goodTransRecords.map(row =>row.Column_name).reduce(_ + _)
+```
 ### What do you understand by SchemaRDD?  
 An RDD that consists of row objects (wrappers around basic string or integer arrays) with schema information about the type of data in each column.  
 ### Case class in SparkSQL?  
