@@ -115,3 +115,7 @@ object pivot_DF extends App{
 
 }
 ```
+Syntax:  
+val resultDF = rawDF.groupBy("unchanging cloumns").  
+               pivot("from_cloumn", Seq("to_cloumns","_in_Strings")).  
+               agg(first("column to be aggregated"))  
