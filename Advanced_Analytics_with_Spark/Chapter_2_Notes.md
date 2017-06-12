@@ -87,3 +87,31 @@ object pivot extends App{
 }  
 ```
 #### Pivoting of a table using :  
+```Scala
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.functions.first
+import org.apache.spark.{SparkConf, SparkContext}
+
+case class df_tabel(userid:String, age:Int, country:String, number_of_calls:Int)
+
+object pivot_DF extends App{
+
+  val sc = new SparkContext(new SparkConf().setAppName("pivot").setMaster("local[*]"))
+
+  val sqlcontext = new SQLContext(sc)
+
+  val data = List(("x01", 41, "us", 3), ("x01", 41, "uk", 1),
+    ("x02", 72, "us", 4), ("x02", 72, "uk", 6))
+
+  val datardd = sc.parallelize(data)
+
+  import sqlcontext.implicits._
+
+  val dataDF = datardd.map(line => df_tabel(line._1, line._2, line._3, line._4)).toDF()
+
+  dataDF.show()
+  dataDF.groupBy("userid", "age").pivot("country", Seq("us", "uk"))
+    .agg(first("number_of_calls")).show()
+
+}
+```
