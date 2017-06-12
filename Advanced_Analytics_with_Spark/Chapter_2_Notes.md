@@ -18,6 +18,7 @@ def longForm(desc: DataFrame): DataFrame = {
 used to transform row structure to columnar structure.  
 Ex:  
 Raw Data:  
+```Scala
 +------+---+-------+---------------+  
 |userid|age|country|number_of_calls|  
 +------+---+-------+---------------+  
@@ -26,13 +27,16 @@ Raw Data:
 |   x02| 72|     us|              4|  
 |   x02| 72|     uk|              6|  
 +------+---+-------+---------------+  
+```
 Final Data:  
+```Scala
 +------+---+---+---+  
 |userid|age| us| uk|  
 +------+---+---+---+  
 |   x01| 41|  3|  1|  
 |   x02| 72|  4|  6|  
 +------+---+---+---+  
+```
 #### Pivoting of a table using RDD:  
 ``` scala
 import org.apache.spark.{SparkConf, SparkContext}  
