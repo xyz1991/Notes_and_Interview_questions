@@ -173,8 +173,9 @@ Resource identification through URI: A RESTful web service exposes a set of reso
 Uniform interface: Resources are manipulated using a fixed set of four create, read, update, delete operations: PUT, GET, POST, and DELETE. PUT creates a new resource, which can be then deleted by using DELETE. GET retrieves the current state of a resource in some representation. POST transfers a new state onto a resource.  
 Self-descriptive messages: Resources are decoupled from their representation so that their content can be accessed in a variety of formats, such as HTML, XML, plain text, PDF, JPEG, JSON, and others. Metadata about the resource is available and used, for example, to control caching, detect transmission errors, negotiate the appropriate representation format, and perform authentication or access control.  
 Stateful interactions through hyperlinks: Every interaction with a resource is stateless; that is, request messages are self-contained. Stateful interactions are based on the concept of explicit state transfer. Several techniques exist to exchange state, such as URI rewriting, cookies, and hidden form fields. State can be embedded in response messages to point to valid future states of the interaction.  <br />
-### Difference between a Data Engineer, Data Analyst and Data Scientist? <br /> 
-### Type of Analytics Done on Big Data?  <br />
+### Difference between a Data Engineer, Data Analyst and Data Scientist?   
+  
+### Type of Analytics Done on Big Data?  
 Descriptive Analytics: If you just told me that you spent 25% on food, 35% on clothing, 20% on entertainment and the rest on miscellaneous items last year using your credit card, that is descriptive analytics. Of course, you can go into lot more detail as well.  
   
 Predictive Analytics: If you analyzed your credit card history for the past 5 years and the split is somewhat consistent, you can safely forecast with high probability that next year will be similar to past years. The fine print here is that this is not about ‘predicting the future’ rather ‘forecasting with probabilities’ of what might happen. In Big data predictive analytics, data scientists may use advanced techniques like data mining, machine learning, and advanced statistical processes (we’ll discuss all these terms later) to forecast weather, economy etc.  
@@ -318,6 +319,9 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
 ### Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
 ### Adding other jars(thrid party) in spark when execution in spark-submit?  
 ### What are broadcast and Accumulator variables in Spark?  
+variables defined in program are generally only available to Drivers but the job is performed at the executors. So, the variables need to converted into the Broadcast variables using sc.broadcast technique, as seen below.  
+val countries = List("us", "uk")  
+val brc = sc.broadcast(countries)  
   
 ## SparkSQL  
 ### Detail about the SparkSession object in Spark 2.0? How does it differs from SQLCONTEXT and HIVECONTEXT?    
