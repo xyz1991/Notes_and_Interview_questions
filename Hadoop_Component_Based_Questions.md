@@ -579,6 +579,49 @@ hotelhodsrrequest_pccparsing_scala.month as Month
 FROM hotelhodsrrequest_PCCparsing_scala;  
 ### Partioning External Table in Hive?  
 Has creating a external table involves changing of the Default Table Data path, we need add each partion manullay using Alter Table command. ALTER TABLE user ADD PARTITION(date='2010-02-22') to update the metadata in Hive metastore.  
+### Creation, Partitioning and loading data into internal and external table?  
+#### Internal Table:  
+```SQL 
+Creation:  
+CREATE TABLE weather (wban INT, date STRING, precip INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ‘,’
+LOCATION ‘ /hive/data/weather’;
+```
+```SQL
+Load the Data in Table:  
+LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weather;  
+```
+#### External Tables:  
+```SQL
+Creation:
+CREATE EXTERNAL TABLE weatherext ( wban INT, date STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ‘,’
+LOCATION ‘ /hive/data/weatherext’;
+```
+```SQL
+Loading data:
+LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext;
+```
+#### Partitioning:  
+```SQL
+Creation:  
+CREATE EXTERNAL TABLE IF NOT EXSISTS weatherext ( wban INT, date STRING)
+PARTITIONED BY (year INT, month STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ‘,’
+LOCATION ‘ /hive/data/weatherext’;
+```
+```SQL
+Loading the Data:
+LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext PARTITION (year=2012, month=’01’);
+LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext PARTITION (year=2012, month=’02’);
+```
+```SQL
+Querying:  
+SELECT * FROM weatherext WHERE month = ‘02’;
+```
 ### DIfference between where and having clauses?  
 HAVING is used to check conditions after the aggregation takes place.  
 WHERE is used before the aggregation takes place.  
