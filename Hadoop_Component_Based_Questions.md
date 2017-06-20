@@ -605,13 +605,33 @@ Loading data:
 LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext;
 ```
 #### Partitioning:  
+##### Internal Table:  
 ```SQL
 Creation:  
-CREATE EXTERNAL TABLE IF NOT EXSISTS weatherext ( wban INT, date STRING)
-PARTITIONED BY (year INT, month STRING)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ‘,’
-LOCATION ‘ /hive/data/weatherext’;
+CREATE TABLE user (
+  userId BIGINT,
+  type INT,
+  level TINYINT,
+)
+COMMENT 'User Infomation'
+PARTITIONED BY (date String)
+```
+```SQL
+Loading the Data:
+LOAD INPATH '/user/chris/data/testdata' OVERWRITE INTO TABLE user PARTITION (date='2012-02-22');
+```
+##### External Table:
+```SQL
+Creation:  
+CREATE EXTERNAL TABLE user (
+  userId BIGINT,
+  type INT,
+  level TINYINT,
+  date String
+)
+COMMENT 'User Infomation'
+PARTITIONED BY (date String)
+LOCATION '/user/chris/datastore/user/';
 ```
 ```SQL
 Loading the Data:
@@ -619,8 +639,8 @@ LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext PARTITION (year
 LOAD DATA INPATH ‘hdfs:/data/2012.txt’ INTO TABLE weatherext PARTITION (year=2012, month=’02’);
 ```
 ```SQL
-Querying:  
-SELECT * FROM weatherext WHERE month = ‘02’;
+UpDate MetaStore for partitions individually:
+ALTER TABLE user ADD PARTITION(date='2010-02-22');
 ```
 ### DIfference between where and having clauses?  
 HAVING is used to check conditions after the aggregation takes place.  
