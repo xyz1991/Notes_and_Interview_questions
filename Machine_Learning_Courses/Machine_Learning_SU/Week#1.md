@@ -17,3 +17,5 @@ Regression: for continuous-response values
 ## UnSupervised Learning:  
 Unsupervised learning is a type of machine learning algorithm used to draw inferences from datasets consisting of input data without labeled responses.  
 The most common unsupervised learning method is cluster analysis, which is used for exploratory data analysis to find hidden patterns or grouping in data. The clusters are modeled using a measure of similarity which is defined upon metrics such as Euclidean or probabilistic distance.  
+With unsupervised learning there is no feedback based on the prediction results.  
+
