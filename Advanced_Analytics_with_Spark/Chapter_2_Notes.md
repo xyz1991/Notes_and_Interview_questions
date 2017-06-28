@@ -90,7 +90,7 @@ object pivot extends App{
   
 }  
 ```
-#### Pivoting of a table using :  
+#### Pivoting of a table using DataFrame:  
 ```Scala
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.first
