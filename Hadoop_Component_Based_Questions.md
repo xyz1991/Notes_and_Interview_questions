@@ -370,6 +370,7 @@ In cluster mode, the driver runs in the ApplicationMaster on a cluster host chos
 </p>   
 The cluster mode is not well suited to using spark interactively, it can only provide output to HDFS.  
 In cluster mode, YARN restarts the driver without killing the executors. So, this depolyment mode is preferred for spark jobs running in Production.  
+  
 ```Scala
 --master yarn --deploy-mode cluster
 ```  
