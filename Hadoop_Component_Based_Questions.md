@@ -358,9 +358,11 @@ In client mode, the driver runs on the host where the job is submitted. The Appl
 </p>  
 The Program can interact with the client shell, where the program is submitted.  
 In client mode, YARN automatically kills all executors if your driver is killed.  
+  
 ```Scala
 --master yarn --deploy-mode client
 ```  
+  
 #### Custer:  
 In cluster mode, the driver runs in the ApplicationMaster on a cluster host chosen by YARN. This means that the same process, which runs in a YARN container, is responsible for both driving the application and requesting resources from YARN. The client that launches the application doesn't need to continue running for the entire lifetime of the application.  
 <p align="center">
