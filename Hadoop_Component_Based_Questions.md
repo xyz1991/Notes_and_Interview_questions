@@ -347,7 +347,7 @@ Special operations can be performed on RDDs in Spark using key/value pairs and s
 #### local[*]:  
 Used to test the code by running the Driver and executors on the submitted machine.  
 This cannot the advantages of distributed environment.  
-* is the number of cpu cores to be allocated to perform the local operation and means that the driver can use all the available cores.  
+[*] is the number of cpu cores to be allocated to perform the local operation and means that the driver can use all the available cores.  
 ```Scala
 new SparkConf() .setMaster("local[*]")
 ```
@@ -363,7 +363,7 @@ In client mode, YARN automatically kills all executors if your driver is killed.
 --master yarn --deploy-mode client
 ```  
   
-#### Custer:  
+#### Cluster:  
 In cluster mode, the driver runs in the ApplicationMaster on a cluster host chosen by YARN. This means that the same process, which runs in a YARN container, is responsible for both driving the application and requesting resources from YARN. The client that launches the application doesn't need to continue running for the entire lifetime of the application.  
 <p align="center">
    <img src="https://www.dropbox.com/s/szenqx2ry9k69cq/Yarn_Cluster_mode.png?raw=1" width="650"/>
