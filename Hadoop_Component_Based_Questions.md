@@ -252,8 +252,6 @@ spark-submit \
 --conf "spark.speculation.multiplier=5" \  
 --conf "spark.speculation.quantile=0.90" \  
 --class "org.asyncified.myClass" "path/to/uberjar.jar"  
-### Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
-### Adding other jars(thrid party) in spark when execution in spark-submit?  
 ### How can you minimize data transfers when working with Spark?  
 Minimizing data transfers and avoiding shuffling helps write spark programs that run in a fast and reliable manner. The various ways in which data transfers can be minimized when working with Apache Spark are:  
 Using Broadcast Variable- Broadcast variable enhances the efficiency of joins between small and large RDDs.  
@@ -345,7 +343,35 @@ A sparse vector has two parallel arrays –one for indices and the other for val
 ### UDFs in Spark?  
 ### What do you understand by Pair RDD?  
 Special operations can be performed on RDDs in Spark using key/value pairs and such RDDs are referred to as Pair RDDs. Pair RDDs allow users to access each key in parallel. They have a reduceByKey () method that collects data based on each key and a join () method that combines different RDDs together, based on the elements having the same key.  
-### Differences in Spark Deployment mode(yarn-cluster and yarn-client mode)?  
+### Differences in Spark Deployment mode(local[*] and yarn-cluster and yarn-client mode)?  
+#### local[*]:  
+Used to test the code by running the Driver and executors on the submitted machine.  
+This cannot the advantages of distributed environment.  
+* is the number of cpu cores to be allocated to perform the local operation and means that the driver can use all the available cores.  
+```Scala
+new SparkConf() .setMaster("local[*]")
+```
+#### Client:  
+In client mode, the driver runs on the host where the job is submitted. The ApplicationMaster is merely present to request executor containers from YARN. The client communicates with those containers to schedule work after they start.  
+<p align="center">
+   <img src="https://www.dropbox.com/s/35k8pgvy5zyodam/Yarn_Client_mode.png?raw=1" width="650"/>
+</p>  
+The Program can interact with the client shell, where the program is submitted.  
+In client mode, YARN automatically kills all executors if your driver is killed.  
+```Scala
+--master yarn --deploy-mode client
+```
+#### Custer:  
+In cluster mode, the driver runs in the ApplicationMaster on a cluster host chosen by YARN. This means that the same process, which runs in a YARN container, is responsible for both driving the application and requesting resources from YARN. The client that launches the application doesn't need to continue running for the entire lifetime of the application.  
+<p align="center">
+   <img src="https://www.dropbox.com/s/szenqx2ry9k69cq/Yarn_Cluster_mode.png?raw=1" width="650"/>
+</p>   
+The cluster mode is not well suited to using spark interactively, it can only provide output to HDFS.  
+In cluster mode, YARN restarts the driver without killing the executors. So, this depolyment mode is preferred for spark jobs running in Production.  
+```Scala
+--master yarn --deploy-mode cluster
+```  
+  
 ### Adding other jars(thrid party) in spark when execution in spark-submit?  
 ### What are broadcast and Accumulator variables in Spark?  
 variables defined in program are generally only available to Drivers but the job is performed at the executors. So, the variables need to converted into the Broadcast variables using sc.broadcast technique, as seen below.  
