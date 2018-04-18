@@ -31,7 +31,7 @@ The Data collected in HDFS is Processed using Hive, Impala and Spark to Load Rec
 ### Descibe why is it neccessary for Enterprices to have both NoSQL and Hadoop components in it for Data processing?  
 The ability to extract information from operational data in real time is critical for a modern, agile enterprise. The faster you can harness insights from data, the greater your advantage in driving revenue, reducing costs, and increasing efficiency. Modern architecture for real time big data combines Hadoop and NoSQL. Hadoop is engineered for big data analytics, but it’s not real time. NoSQL is engineered for real-time big data, but it’s operational rather than analytical. NoSQL together with Hadoop is the key to real time big data.  
 <p align="center">
-  <img src="https://photos.app.goo.gl/OUXQCtz5Y7J3sdm63" width="650"/>
+  <img src="https://drive.google.com/file/d/1hRhJciF8VSRgLuSRy58VL5RKHY2OaE5goQ/view" width="650"/>
 </p>
     
 ### What are operational and analytical operations?  
