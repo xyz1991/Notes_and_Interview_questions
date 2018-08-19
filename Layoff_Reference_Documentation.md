@@ -6,5 +6,8 @@ To perform the forth mentioned jobs. I typically work with numerous HDP componen
 It’s not my responsibility to be forthcoming in building conceptual and very basic understanding in-regards to structuring, coding, extraction, manipulating, adding and parsing of any codes or components associated with Hadoop platforms like HDP or CDH for other Developers or teammates or any other person. U heard me.  
 These guys are not students and neither e’m I any sort of professor. This is surely not a University my dear Friend.  
   
-# Disappointment Jutification
+# Disappointment Jutification  
+I feel not only disappointed and wronged but also feel humiliated and exploited. I also feel that I was being harvested for my skills and knowledge, when it comes to this knowledge sharing session.  
+Why shouldn’t I feel so, when things seems so. If it crawls like a snake and sounds like a snake, it is a snake. Buddy.  
+  
 # Dealing with Teammates
