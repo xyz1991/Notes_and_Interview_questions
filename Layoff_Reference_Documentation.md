@@ -4,6 +4,6 @@ To perform the forth mentioned jobs. I typically work with numerous HDP componen
   
 # Micro KT Justification  
 It’s not my responsibility to be forthcoming in building conceptual and very basic understanding in-regards to structuring, coding, extraction, manipulating, adding and parsing of any codes or components associated with Hadoop platforms like HDP or CDH for other Developers or teammates or any other person. U heard me.  
-  
+These guys are not students and neither e’m I any sort of professor. This is surely not a University my dear Friend.
 # Disappointment Jutification
 # Dealing with Teammates
