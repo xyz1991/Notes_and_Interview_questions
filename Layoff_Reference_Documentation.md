@@ -10,4 +10,5 @@ These guys are not students and neither e’m I any sort of professor. This is s
 I feel not only disappointed and wronged but also feel humiliated and exploited. I also feel that I was being harvested for my skills and knowledge, when it comes to this knowledge sharing session.  
 Why shouldn’t I feel so, when things seems so. If it crawls like a snake and sounds like a snake, it is a snake. Buddy.  
   
-# Dealing with Teammates
+# Dealing with Teammates  
+I will review the notes on these sessions, to see if there are any gaps or empty holes left in the stuff we have covered. Although, I’m sure we went through all the projects and no further sessions will be required. We can do a review tomorrow.  
