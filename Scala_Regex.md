@@ -99,9 +99,15 @@ val MoviesZipRE = "movies (\\d{5})".r
 // match "movies near boulder, co"
 val MoviesNearCityStateRE = "movies near ([a-z]+), ([a-z]{2})".r
 
-textUserTyped match {
+"movies near boulder, co" match {
     case MoviesZipRE(zip) => getSearchResults(zip)
     case MoviesNearCityStateRE(city, state) => getSearchResults(city, state)
     case _ => println("did not match a regex")
+}
+(OR)
+"movies near boulder, co" match {
+  case MoviesZipRE(zip) => println(zip)
+  case MoviesNearCityStateRE(city, state) => println(city)
+  case _=>println("No match bro")
 }
 ```
