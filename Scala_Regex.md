@@ -80,3 +80,28 @@ pattern.findAllIn(string).matchData foreach {
    m => println(m.group(1))
 }
 ```
+
+## Group Extraction  
+```scala
+scala> val pattern = "([0-9]+) ([A-Za-z]+)".r
+pattern: scala.util.matching.Regex = ([0-9]+) ([A-Za-z]+)
+
+scala> val pattern(count, fruit) = "100 Bananas"
+count: String = 100
+fruit: String = Bananas
+```
+  
+## Group Extraction error handling  
+```scala
+// match "movies 80301"
+val MoviesZipRE = "movies (\\d{5})".r
+
+// match "movies near boulder, co"
+val MoviesNearCityStateRE = "movies near ([a-z]+), ([a-z]{2})".r
+
+textUserTyped match {
+    case MoviesZipRE(zip) => getSearchResults(zip)
+    case MoviesNearCityStateRE(city, state) => getSearchResults(city, state)
+    case _ => println("did not match a regex")
+}
+```
