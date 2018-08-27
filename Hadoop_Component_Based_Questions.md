@@ -261,7 +261,7 @@ Minimizing data transfers and avoiding shuffling helps write spark programs that
 Using Broadcast Variable- Broadcast variable enhances the efficiency of joins between small and large RDDs.  
 Using Accumulators – Accumulators help update the values of variables in parallel while executing.  
 The most common way is to avoid operations ByKey, repartition or any other operations which trigger shuffles.  
-### Memory manegment for Spark job execution in running phase?  
+### Memory manegment for Spark job execution via Tunning memory parameters for spark job execution?  
 #### Inputs:  
 From Resource maneger on Port 8088:  
 number of VCores = 84 cores= VC  
@@ -273,6 +273,22 @@ number of executor-cores for each executor = 3 to 5 = e
 number of executors per machine(worker or slave node) ={(VC/n)-1}/e  
 number of threads trying to read and write from HDFS per machine = e*{((VC/n)-1)/e}  
 Total number of cores per spark Application = n*{((VC/n)-1)/e}*e  
+Total memory per spark Application = {(M*e)/(n*((VC/n)-1))}*0.9*{n*(((VC/n)-1)/e)}  
+#### Output:  
+--executor-cores = e  
+--num-executors = ({(VC/n)-1}/e)*n  
+--executor-memory = {(M*e)/(n*((VC/n)-1))}*0.9  
+```example
+Auxilary Outputs:
+number of executors per machine(worker or slave node) ={(84/6)-1}/3=4  
+number of threads trying to read and write from HDFS per machine = 3 cores*4 executor = 12 threads 
+Total number of cores per spark Application = 24 executors * 3 cores/executors = 72 cores 
+Total memory per spark Application = 12 GB * 24 executors = 288 GB  
+real Outputs:
+--executor-cores = 3 
+--num-executors = ({(84/6)-1}/3)*6 = 24  
+--executor-memory = {(336*3)/(6*((84/6)-1))}*0.9 = 12 GB  
+```
 ### Hadoop uses replication to achieve fault tolerance. How is this achieved in Apache Spark?  
 Data storage model in Apache Spark is based on RDDs. RDDs help achieve fault tolerance through lineage. RDD always has the information on how to build from other datasets. If any partition of a RDD is lost due to failure, lineage helps build only that particular lost partition.  
 ### Why is Spark conf and spark context related to the program?  
