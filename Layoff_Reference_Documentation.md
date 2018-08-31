@@ -25,3 +25,4 @@ v)	The user who gave the query need to be responsible. I can only be alerted and
 vi)	I have made necessary modifications for job to go through today, but it was team responsibility(specially the individual, who is running the query) to make sure of resources for queries were available and to alert the necessary member(if he/she is unaware) to fix it.  
 vii) Please be aware of the above points, use cluster with perspicacity and make necessary teammate/ teammates aware of the problems on a needy basis, I thank you for fulling your responsibility yesterday.  
   
+### All this because "If you're giving your all to someone and it's not enough, you're giving it to the wrong person."
