@@ -349,6 +349,7 @@ Ex: myPair.reduceByKey{case(a, b)=> a+b}
 <p align="center">
   <img src="https://drive.google.com/uc?export=view&id=12EU_-_KVpw7CABcBJfC8mFA00NbN0wXB" width="650"/>
 </p>  
+  
 #### CombineByKey:  
 RDD's in nodes:  
 Partition1=> [(Messi,45)(Messi,48)]  
