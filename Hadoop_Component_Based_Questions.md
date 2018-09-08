@@ -346,6 +346,9 @@ Shuffling in nodes and aggregation in drivers
 When called on an RDD of (k, v) pairs, returns an RDD of (k,v) pairs where the values for each key are aggregated using the given  
 reduce function. The function should be able to take arguments of same type and it returns same data type as a result.  
 Ex: myPair.reduceByKey{case(a, b)=> a+b}  
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=12EU_-_KVpw7CABcBJfC8mFA00NbN0wXB" width="650"/>
+</p>  
 #### CombineByKey:  
 RDD's in nodes:  
 Partition1=> [(Messi,45)(Messi,48)]  
