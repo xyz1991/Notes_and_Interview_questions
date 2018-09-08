@@ -337,6 +337,9 @@ When called on an RDD of (k, v) pairs returns an RDD of (k, Iterable(V)) pairs.
 RDD's in nodes: [(k1, v1)(k1, v2)] [(k2, v1)(k1, v3)] [(k2, v4)(k1, v3)]  
 RDD's in Driver:  [(k1, v1)(k1, v2)(k1, v3)(k1, v3)]=> (k1,(v1,v2,v3)) [(k2, v1)(k2, v4)]=>(k2, (v1,v4))  
 Ex myPair.groupByKey()  
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=12LLiL4aGF-G0bTj62CQxNHDfUZ3PinAC" width="650"/>
+</p>
 #### ReduceByKey:  
 Shuffling in nodes and aggregation in drivers  
 When called on an RDD of (k, v) pairs, returns an RDD of (k,v) pairs where the values for each key are aggregated using the given  
