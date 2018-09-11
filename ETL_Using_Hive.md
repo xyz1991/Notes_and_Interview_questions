@@ -146,3 +146,53 @@ select *
 from 
 pageviewstaging;
 ```  
+  
+# UDF's in Hive  
+  
+## Prepare Python Script  
+```SQL
+[cloudera@quickstart ~]$ cat /tmp/udf.py
+import sys
+import datetime
+for line in sys.stdin:
+  line = line.strip()
+  fname , lname = line.split('\t')
+  l_name = lname.lower()
+  print '::'.join([fname, str(l_name)])
+```
+  
+## Prepare Input Data  
+```SQL
+[cloudera@quickstart ~]$ cat /tmp/mytableData
+x	x
+y	y
+z	z
+```
+  
+## Copy input data to HDFS  
+```SQL
+[cloudera@quickstart ~]$ hadoop fs -copyFromLocal /tmp/mytableData /user/cloudera/hivetabledir/
+```
+  
+## Create table in Hive  
+```SQL
+hive>>CREATE table IF NOT EXISTS mytable(
+fname STRING,
+lname STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE;
+```
+  
+## Load data into Hive table using Hive  
+```SQL
+hive>>LOAD DATA INPATH '/user/cloudera/hivetabledir/mytableData' OVERWRITE INTO TABLE mytable;
+```
+  
+## add python file into Hive  
+```SQL
+hive>>add FILE /tmp/udf.py;
+```
+  
+## Apply UDF's on table into Hive  
+```SQL
+hive>>SELECT TRANSFORM(fname, lname) USING 'python udf.py' AS (fname, l_name) FROM mytable;
+```
