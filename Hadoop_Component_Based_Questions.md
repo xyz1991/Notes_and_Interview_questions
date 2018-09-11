@@ -662,6 +662,8 @@ Partioning of Hive tables can result in unknown number of Directories in Hive de
   
 Bucketing is another technique for decomposing data sets into more manageable parts in each Hive_Table Partition. Records with the same Column_value will always be stored in the same bucket. Hive can create a logically correct sampling. Bucketing also aids in doing efficient map-side joins and will be stored in a given number of Buckets specified in the Query.  
   
+Partitioning is not bounded during schema decleration. While bucketting is bounded to fixed number, during schema decleration.
+  
 set hive.exec.dynamic.partition=true;  
 set hive.enforce.bucketing = true;  
 create table IF NOT EXISTS hotelhodsrrequest_PCCparsing_scala_Partitioned_and_Bucketed (PCC String, PropertyCode String, Duplication_Counts int)  
