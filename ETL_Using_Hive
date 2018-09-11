@@ -31,3 +31,4 @@ INSERT INTO TABLE pageviews PARTITION (datestamp)
 ## Testing:  
 ```SQL
 select * from pageviews where came_from is NULL; ```   
+  
