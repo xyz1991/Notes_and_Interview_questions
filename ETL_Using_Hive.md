@@ -136,4 +136,13 @@ MSCK REPAIR TABLE user;
 ```SQL
 select * from user;
 ```
+   
+# Staging data to Primary Table  
   
+## Loading data into Primary Partitioned Table from external staging table:  
+```SQL
+insert into table pageviews partition(datestamp)
+select *
+from 
+pageviewstaging;
+```  
