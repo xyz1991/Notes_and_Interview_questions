@@ -36,3 +36,55 @@ INSERT INTO TABLE pageviews PARTITION (datestamp)
 select * from pageviews where came_from is NULL; 
 ```   
   
+# External Staging table creation:  
+  
+## Input Preparations:  
+```SQL
+cat /tmp/part1
+xxx,xx.com,,2018-09-10
+yyy,yyy.com,sports.com,2018-09-10
+jdoe,mail.com,,2018-09-10
+tjohnson,sports.com,finance.com,2018-09-10
+
+cat /tmp/part2
+xxx,xx.com,,2018-09-10
+yyy,yyy.com,sports.com,2018-09-10
+jdoe,mail.com,,2018-09-10
+tjohnson,sports.com,finance.com,2018-09-10
+
+hadoop fs -mkdir /user/cloudera/hivetabledir
+
+hadoop fs -copyFromLocal /tmp/part* /user/cloudera/hivetabledir
+
+hadoop fs -ls /user/cloudera/hivetabledir
+
+hadoop fs -cat /user/cloudera/hivetabledir/part*
+xxx,xx.com,,2018-09-10
+yyy,yyy.com,sports.com,2018-09-10
+jdoe,mail.com,,2018-09-10
+tjohnson,sports.com,finance.com,2018-09-10
+xxx,xx.com,,2018-09-10
+yyy,yyy.com,sports.com,2018-09-10
+jdoe,mail.com,,2018-09-10
+tjohnson,sports.com,finance.com,2018-09-10
+```
+  
+## External Table Creation from data at HDFS location:  
+```SQL
+CREATE EXTERNAL TABLE pageviewstaging(userid STRING, 
+link STRING, 
+came_from STRING,
+datestamp STRING)
+COMMENT 'This is the staging table'
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+LOCATION '/user/cloudera/hivetabledir';
+```
+  
+## Testing:  
+```SQL
+select * from pageviewstaging;
+```
+  
