@@ -88,3 +88,52 @@ LOCATION '/user/cloudera/hivetabledir';
 select * from pageviewstaging;
 ```
   
+# Partitioned External Table  
+## Input Preparations for Partitioned External Table:  
+```SQL
+[cloudera@quickstart ~]$ cat /tmp/partitionedpart1
+1,1,1
+2,2,2
+3,3,3
+4,4,4
+5,5,5
+[cloudera@quickstart ~]$ cat /tmp/partitionedpart2
+6,6,6
+7,7,7
+8,8,8
+9,9,9
+10,10,10
+[cloudera@quickstart ~]$ hadoop fs -mkdir /user/cloudera/hiveparttabledir
+[cloudera@quickstart ~]$ hadoop fs -mkdir /user/cloudera/hiveparttabledir/date=2010-02-22
+[cloudera@quickstart ~]$ hadoop fs -mkdir /user/cloudera/hiveparttabledir/date=2011-02-22
+[cloudera@quickstart ~]$ hadoop fs -copyFromLocal /tmp/partitionedpart1 /user/cloudera/hiveparttabledir/date=2010-02-22
+[cloudera@quickstart ~]$ hadoop fs -copyFromLocal /tmp/partitionedpart2 /user/cloudera/hiveparttabledir/date=2011-02-22
+```
+  
+
+## External Partitioned Table Creation from data at HDFS location:  
+```SQL
+CREATE EXTERNAL TABLE user (
+  userId INT,
+  type INT,
+  level INT
+)
+COMMENT 'User Infomation'
+PARTITIONED BY (date String)
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+LOCATION '/user/cloudera/hiveparttabledir/';
+```
+  
+## Neccessary Partitions repairs:  
+```SQL
+MSCK REPAIR TABLE user;
+```
+
+## Testing:  
+```SQL
+select * from user;
+```
+  
