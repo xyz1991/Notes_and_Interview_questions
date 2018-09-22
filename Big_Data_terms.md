@@ -60,3 +60,5 @@ Spark (Apache Spark): Apache Spark is a fast, in-memory data processing engine t
 Stream processing: Stream processing is designed to act on real-time and streaming data with “continuous” queries. Combined with streaming analytics i.e. the ability to continuously calculate mathematical or statistical analytics on the fly within the stream, stream processing solutions are designed to handle high volume in real time. 
 
 Structured v Unstructured Data: This is one of the ‘V’s of Big Data i.e.Variety. Structured data is basically anything than can be put into relational databases and organized in such a way that it relates to other data via tables. Unstructured data is everything that can’t – email messages, social media posts and recorded human speech etc.
+  
+This is the change.  
